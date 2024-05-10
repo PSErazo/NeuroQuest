@@ -1,9 +1,14 @@
 <shared-level></shared-level>
+
 <ul class="grid grid-cols-3 gap-4 size-auto w-80 h-80">
   <li
     *ngFor="let quadrate of quadrates"
-    class="bg-blue-300 rounded-lg hover:bg-blue-400"
+    class="quadrate bg-blue-300 rounded-lg hover:bg-blue-400 drop-shadow-lg"
   >
     <span class="hidden">{{ quadrate }}</span>
   </li>
 </ul>
+
+<!-- <div>{{ this.randomCorrect }}</div> -->
+<button (click)="generateLevel()">click</button>
+<!-- <button (click)="click()">click</button> -->
