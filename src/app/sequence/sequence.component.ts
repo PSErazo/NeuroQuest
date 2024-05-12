@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { LevelComponent } from '../shared/level/level.component';
 
 @Component({
@@ -10,14 +11,23 @@ import { LevelComponent } from '../shared/level/level.component';
   styleUrl: './sequence.component.css',
 })
 export class SequenceComponent implements OnInit {
+  // Swal = require('sweetalert2');
   quadrates: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   randomCorrect: number[] = [];
 
   level: number = 0;
   id: number = 0;
+  hearts: string[] = ['💜', '💜', '💜'];
 
   ngOnInit(): void {
+    this.levelUp();
+  }
+  restarGame() {
+    this.level = 0;
+    this.id = 0;
+    this.randomCorrect = [];
+    this.hearts = ['💜', '💜', '💜'];
     this.levelUp();
   }
 
@@ -96,6 +106,15 @@ export class SequenceComponent implements OnInit {
         this.deshabilitar(quadrate - 1, 'fadeInError');
       }, 300);
       console.log('error');
+      this.hearts.pop();
+      if (this.hearts.length < 1) {
+        Swal.fire({
+          title: 'GAME OVER',
+          confirmButtonText: 'Reset Game',
+        }).then(() => {
+          this.restarGame();
+        });
+      }
     }
     console.log('validateClick', quadrate);
   }
