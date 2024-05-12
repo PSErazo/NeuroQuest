@@ -1,14 +1,15 @@
-<shared-level></shared-level>
+<shared-level [level]="level" class="text-center mb-2"></shared-level>
 
 <ul class="grid grid-cols-3 gap-4 size-auto w-80 h-80">
   <li
     *ngFor="let quadrate of quadrates"
-    class="quadrate bg-blue-300 rounded-lg hover:bg-blue-400 drop-shadow-lg"
+    class="quadrate bg-blue-400 rounded-lg hover:bg-blue-500 drop-shadow-lg"
+    (click)="validateClick(quadrate)"
   >
     <span class="hidden">{{ quadrate }}</span>
   </li>
 </ul>
 
 <!-- <div>{{ this.randomCorrect }}</div> -->
-<button (click)="levelUp()">click</button>
+<!-- <button (click)="levelUp()">click</button> -->
 <!-- <button (click)="click()">click</button> -->

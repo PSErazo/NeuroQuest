@@ -7,6 +7,7 @@ import { LevelComponent } from '../shared/level/level.component';
   standalone: true,
   imports: [CommonModule, LevelComponent],
   templateUrl: './sequence.component.html',
+  styleUrl: './sequence.component.css',
 })
 export class SequenceComponent implements OnInit {
   quadrates: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -14,21 +15,20 @@ export class SequenceComponent implements OnInit {
   randomCorrect: number[] = [];
 
   level: number = 0;
-
-  indentificador: number = 1;
+  id: number = 0;
 
   ngOnInit(): void {
-    // this.runCards(this.randomCorrect);
+    this.levelUp();
   }
 
   levelUp() {
     this.level++;
+    this.id = 0;
     //generar random correct
     this.randomCorrect.push(
       this.generateRandom(this.randomCorrect[this.randomCorrect.length - 1])
     );
     this.preview([...this.randomCorrect]);
-    // this.viewCorrect();
     console.log(this.randomCorrect);
   }
 
@@ -53,23 +53,50 @@ export class SequenceComponent implements OnInit {
         return;
       }
       if (!habilitado) {
-        this.habilitar(arrayNumber[i] - 1);
+        this.habilitar(arrayNumber[i] - 1, 'fadeIn');
         habilitado = true;
       } else if (habilitado) {
-        this.deshabilitar(arrayNumber[i] - 1);
-        habilitado = false;
+        this.deshabilitar(arrayNumber[i] - 1, 'fadeIn');
         i++;
+        if (i === arrayNumber.length) {
+          clearInterval(x);
+          return;
+        } else {
+          this.habilitar(arrayNumber[i] - 1, 'fadeIn');
+        }
       }
     }, 500);
   }
-  habilitar(card: number) {
-    document.getElementsByClassName('quadrate')[card].classList.add('bg-white');
+  habilitar(card: number, style: string) {
+    document.getElementsByClassName('quadrate')[card].classList.add(style);
     return;
   }
-  deshabilitar(card: number) {
-    document
-      .getElementsByClassName('quadrate')
-      [card].classList.remove('bg-white');
+  deshabilitar(card: number, style: string) {
+    document.getElementsByClassName('quadrate')[card].classList.remove(style);
     return;
+  }
+
+  validateClick(quadrate: number) {
+    let correct: boolean =
+      quadrate == this.randomCorrect[this.id] ? true : false;
+    console.log('correct', correct);
+    if (correct) {
+      this.habilitar(quadrate - 1, 'fadeIn');
+      setTimeout(() => {
+        this.deshabilitar(quadrate - 1, 'fadeIn');
+      }, 300);
+      this.id++;
+      if (this.id == this.randomCorrect.length) {
+        this.levelUp();
+        return;
+      }
+    } else {
+      this.habilitar(quadrate - 1, 'fadeInError');
+      setTimeout(() => {
+        this.deshabilitar(quadrate - 1, 'fadeInError');
+      }, 300);
+      console.log('error');
+    }
+    console.log('validateClick', quadrate);
   }
 }
