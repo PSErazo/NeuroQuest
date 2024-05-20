@@ -1,15 +1,15 @@
 <div class="flex flex-col h-screen items-center bg-[#1c2124]">
   <shared-nav class="w-full bg-[#1c2124]"></shared-nav>
-  <!-- <router-outlet class="bg-[#1A1B1B] w-full h-[60vh]"> </router-outlet> -->
-  <sequence-game class="bg-[#1A1B1B] w-full h-[60vh]"></sequence-game>
+  <router-outlet> </router-outlet>
+  <div class="flex flex-row justify-center gap-4 w-screen mt-5">
+    <shared-button
+      *ngFor="let game of games"
+      [nameButton]="game.name"
+      [href]="game.router"
+    ></shared-button>
+  </div>
 </div>
 
 <!-- #5eb386 -->
 
 <!-- <router-outlet></router-outlet> -->
-<!-- <div>
-    <shared-button
-      [nameButton]="sequenceMemory.name"
-      [href]="sequenceMemory.router"
-    ></shared-button>
-  </div> -->

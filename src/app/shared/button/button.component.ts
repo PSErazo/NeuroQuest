@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -7,9 +7,13 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
   templateUrl: './button.component.html',
 })
-export class ButtonComponent {
+export class ButtonComponent implements OnInit {
   @Input()
   public nameButton!: string;
   @Input()
   public href!: string;
+
+  ngOnInit(): void {
+    console.log('href', this.href);
+  }
 }

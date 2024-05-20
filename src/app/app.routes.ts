@@ -7,7 +7,7 @@ export const routes: Routes = [
     component: SequenceComponent,
   },
   {
-    path: '/sequencememory',
+    path: 'sequencememory',
     component: SequenceComponent,
   },
 ];
