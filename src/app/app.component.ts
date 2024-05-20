@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { NavComponent } from './shared/nav/nav.component';
+import { ButtonComponent } from './shared/button/button.component';
 import { SequenceComponent } from './sequence/sequence.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SequenceComponent],
+  imports: [RouterOutlet, NavComponent, ButtonComponent, SequenceComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'NeuroQuest';
+  sequenceMemory = {
+    name: 'Sequence Memory',
+    router: 'sequencesmemory',
+  };
 }

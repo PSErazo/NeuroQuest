@@ -1,29 +1,28 @@
 @-o-keyframes fadeIt {
-  0%   { background-color: #FFFFFF; }
-  50%  { background-color: #60a5fa; }
+  0%   { background-color: #ffffff; }
+  50%  { background-color: #519A73; }
   100% { background-color: #FFFFFF; }
 }
 @keyframes fadeIt {
-  0%   { background-color: #FFFFFF; }
-  50%  { background-color: #60a5fa; }
+  0%   { background-color: #ffffff; }
+  50%  { background-color: #519A73; }
   100% { background-color: #FFFFFF; }
 }
 .fadeIn{
-
-    animation: fadeIt 0.8s ease-in-out; 
+    animation: fadeIt 0.8s ease-in-out;
 }
 
 @-o-keyframes fadeItError {
-  0%   { background-color: #60a5fa; }
-  50%  { background-color: #fa6060; }
-  100% { background-color: #60a5fa; }
+  0%   { background-color: #c65956; }
+  50%  { background-color: #519A73; }
+  100% { background-color: #c65956; }
 }
 @keyframes fadeItError {
-  0%   { background-color: #60a5fa; }
-  50%  { background-color: #fa6060; }
-  100% { background-color: #60a5fa; }
+  0%   { background-color: #c65956; }
+  50%  { background-color: #519A73; }
+  100% { background-color: #c65956; }
 }
 .fadeInError{
 
-    animation: fadeItError 0.8s ease-in-out; 
+    animation: fadeItError 1s ease-in-out;
 }
