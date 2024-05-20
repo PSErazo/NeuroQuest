@@ -11,23 +11,23 @@ import { LevelComponent } from '../shared/level/level.component';
   styleUrl: './sequence.component.css',
 })
 export class SequenceComponent implements OnInit {
-  // Swal = require('sweetalert2');
   quadrates: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   randomCorrect: number[] = [];
 
   level: number = 0;
   id: number = 0;
-  hearts: string[] = ['💜', '💜', '💜'];
+  hearts: string[] = ['🤍', '🤍', '🤍'];
 
   ngOnInit(): void {
     this.levelUp();
   }
+
   restarGame() {
     this.level = 0;
     this.id = 0;
     this.randomCorrect = [];
-    this.hearts = ['💜', '💜', '💜'];
+    this.hearts = ['🤍', '🤍', '🤍'];
     this.levelUp();
   }
 
@@ -77,10 +77,12 @@ export class SequenceComponent implements OnInit {
       }
     }, 500);
   }
+
   habilitar(card: number, style: string) {
     document.getElementsByClassName('quadrate')[card].classList.add(style);
     return;
   }
+
   deshabilitar(card: number, style: string) {
     document.getElementsByClassName('quadrate')[card].classList.remove(style);
     return;

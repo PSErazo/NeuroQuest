@@ -10,6 +10,7 @@ import { Component, Input } from '@angular/core';
 export class LevelComponent {
   @Input()
   public level: number = 1;
+
   @Input()
   public hearts: string[] = [];
 }
