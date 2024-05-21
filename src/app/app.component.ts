@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { NavComponent } from './shared/nav/nav.component';
 import { ButtonComponent } from './shared/button/button.component';
 import { SequenceComponent } from './sequence/sequence.component';
@@ -23,11 +23,11 @@ export class AppComponent {
   games = [
     {
       name: 'Sequence Memory',
-      router: 'sequencesmemory',
+      router: '/sequencememory',
     },
     {
       name: 'Visual Memory',
-      router: 'visualmemory',
+      router: '/visualmemory',
     },
   ];
 }

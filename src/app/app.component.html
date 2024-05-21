@@ -1,7 +1,7 @@
 <div class="flex flex-col h-screen items-center bg-[#1c2124]">
   <shared-nav class="w-full bg-[#1c2124]"></shared-nav>
   <router-outlet> </router-outlet>
-  <div class="flex flex-row justify-center gap-4 w-screen mt-5">
+  <div class="flex flex-row justify-center gap-4 w-screen mt-8">
     <shared-button
       *ngFor="let game of games"
       [nameButton]="game.name"
