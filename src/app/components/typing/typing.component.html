@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Comparador de Texto</h1>
+  <p>Texto predefinido:</p>
+  <p id="textoPredefinido">{{ textoPredefinido }}</p>
+  <label for="textoUsuario">Ingresa el texto:</label>
+  <input
+    type="text"
+    id="textoUsuario"
+    [(ngModel)]="textoUsuario"
+    (keydown)="onKeyDown()"
+    (keyup)="onKeyUp()"
+    (paste)="preventAction($event)"
+    (copy)="preventAction($event)"
+  />
+  <p id="resultado">{{ resultado }}</p>
+  <p id="tiempo">{{ tiempo }}</p>
+</div>
