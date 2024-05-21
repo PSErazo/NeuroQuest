@@ -1,10 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'shared-button',
   standalone: true,
-  imports: [RouterModule],
+  imports: [CommonModule, RouterModule, RouterLink],
   templateUrl: './button.component.html',
 })
 export class ButtonComponent implements OnInit {
