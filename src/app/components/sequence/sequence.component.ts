@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { LevelComponent } from '../shared/level/level.component';
+import { LevelComponent } from '../../shared/level/level.component';
 
 @Component({
   selector: 'sequence-game',

@@ -1,0 +1,24 @@
+<section
+  class="bg-[#1A1B1B] w-screen h-[60vh] flex justify-center items-center"
+>
+  <div class="content" id="start-screen">
+    <h2>Memoria Numérica</h2>
+    <p>Yo recuerdo hasta 7 cifras, ¿cuántos puedes recordar tú?</p>
+    <button id="start-button">Empezar</button>
+  </div>
+  <div class="content" id="number-screen" style="display: none">
+    <h1 id="number-display"></h1>
+  </div>
+  <div class="content" id="input-screen" style="display: none">
+    <h2>¿Cuál es el Número?</h2>
+    <input type="text" id="user-input" placeholder="Escribe el número..." />
+    <button id="submit-button">OK</button>
+  </div>
+  <div class="content" id="result-screen" style="display: none">
+    <h2>Número: <span id="correct-number"></span></h2>
+    <h2>Tu Respuesta: <span id="user-answer"></span></h2>
+    <h2>Nivel: <span id="current-level"></span></h2>
+    <button id="next-level-button" style="display: none">Siguiente</button>
+    <button id="try-again-button">Volver a Intentar</button>
+  </div>
+</section>
