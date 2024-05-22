@@ -88,8 +88,10 @@ export class NumberMemoryComponent {
 
   initiateTimer(duration: number) {
     if (typeof document !== 'undefined') {
+      console.log('initialTimer');
       let timerElement = document.getElementById('timer-progress');
       if (!timerElement) {
+        console.log('initialTimer antes de crearse');
         this.createProgressElement();
         timerElement = document.getElementById('timer-progress');
       }
@@ -114,7 +116,10 @@ export class NumberMemoryComponent {
   }
 
   createProgressElement() {
+    console.log('creando el element progress');
+
     if (typeof document !== 'undefined') {
+      console.log('creando el element progress dentro del if');
       const progressContainer = document.createElement('div');
       progressContainer.className = 'progress';
       const progressBar = document.createElement('div');
