@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NavComponent } from './shared/nav/nav.component';
-import { ButtonComponent } from './shared/button/button.component';
+import { ButtonComponent } from './shared/buttons/button.component';
 import { SequenceComponent } from './components/sequence/sequence.component';
 import { CommonModule } from '@angular/common';
 
