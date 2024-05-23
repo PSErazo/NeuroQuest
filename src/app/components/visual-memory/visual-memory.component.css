@@ -1,0 +1,102 @@
+
+/* You can add global styles to this file, and also import other style files */
+body{
+  margin: 0;
+  box-sizing: border-box;
+
+
+}
+
+.bloque-equivocado{
+  background-color: rgb(21,67,104);
+  color:  rgb(21,67,104);
+}
+
+
+.erroneo{
+  background-color: rgb(190,112,135);
+
+}
+
+.gameover-bloque-equivocado{
+  background-color: rgb(86,57,72)!important;
+  color: rgb(86,57,72);
+}
+
+.gameover{
+background-color: rgb(146,98,138);
+color: rgb(146,98,138);
+}
+
+
+
+.shaking-block {
+  animation: shake 0.2s;
+  display: inline-block;
+  background-color:rgb(21,67,104) ;
+}
+
+span{
+  display: none;
+}
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(5px); }
+  50% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+
+.container-level-lifes{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  font-size: 25px;
+  color: rgb(170,207,237);
+
+}
+
+.container-section{
+  max-width: 1400px;
+  margin:0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+li{
+  list-style: none;
+  color: white;
+  font-size: 30px;
+}
+.container-livesandheart{
+  display: flex;
+  gap:10px;
+  color: rgb(170,207,237);
+}
+.container-level{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+p{
+  font-size: 30px;
+}
+
+.lostheart{
+ color: rgb(107,171,223)!important;
+}

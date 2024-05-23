@@ -5,6 +5,11 @@ import { ButtonComponent } from './shared/buttons/button.component';
 import { SequenceComponent } from './components/sequence/sequence.component';
 import { CommonModule } from '@angular/common';
 
+interface games {
+  name: string;
+  router: string;
+}
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -20,7 +25,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  games = [
+  games: games[] = [
     {
       name: 'Sequence Memory',
       router: '/sequencememory',
