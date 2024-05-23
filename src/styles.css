@@ -3,3 +3,41 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.container{
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: repeat(3,1fr);
+  gap:16px;
+  justify-content: center;
+  align-content: center;
+  height: 348px;
+  width: 348px;
+
+}
+
+.container-nivel2{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-template-rows: repeat(4,1fr);
+  gap:12px;
+  justify-content: center;
+  align-content: center;
+  height: 348px;
+  width: 348px;
+}
+
+.bloque{
+  background-color: rgb(35,109,183);
+  border-radius: 12.375px;
+  transition:  background-color 0.5s, transform 0.5s;
+  padding: 10px;
+  color:  rgb(35,109,183);
+}
+
+.active{
+  background-color: white !important;
+  transform: rotateX(180deg) ;
+  color: white;
+}

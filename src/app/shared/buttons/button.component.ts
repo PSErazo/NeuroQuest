@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
+
+interface games {
+  name: string;
+  router: string;
+}
 
 @Component({
   selector: 'shared-button',
@@ -8,13 +13,7 @@ import { RouterLink, RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule, RouterLink],
   templateUrl: './button.component.html',
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent {
   @Input()
-  public nameButton!: string;
-  @Input()
-  public href!: string;
-
-  ngOnInit(): void {
-    console.log('href', this.href);
-  }
+  public games!: games[];
 }
