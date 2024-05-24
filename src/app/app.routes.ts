@@ -4,7 +4,7 @@ import { TypingComponent } from './components/typing/typing.component';
 import { AimTrainerComponent } from './components/aim-trainer/aim-trainer.component';
 import { NumberMemoryComponent } from './components/number-memory/number-memory.component';
 import { ReactionTimeComponent } from './components/reaction-time/reaction-time.component';
-import { VisualmemoryComponent } from './components/visualmemory/visualmemory.component';
+import { VisualMemoryComponent } from './components/visual-memory/visual-memory.component';
 
 export const routes: Routes = [
   {
@@ -31,9 +31,4 @@ export const routes: Routes = [
     path: 'reactiontime',
     component: ReactionTimeComponent,
   },
-
-  {
-    path: 'visualmemory',
-    component: VisualmemoryComponent,
-  }
 ];
