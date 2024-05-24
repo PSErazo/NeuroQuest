@@ -1,6 +1,9 @@
-<a
-  [routerLink]="[href]"
-  class="text-[#1c2124] px-2 py-4 bg-[#519A73] rounded-lg"
->
-  {{ nameButton }}
-</a>
+<div class="flex flex-row justify-center gap-4 w-screen mt-8">
+  <a
+    *ngFor="let game of games"
+    [routerLink]="[game.router]"
+    class="text-[#1c2124] px-2 py-4 bg-[#519A73] rounded-lg"
+  >
+    {{ game.name }}
+  </a>
+</div>
