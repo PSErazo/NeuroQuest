@@ -11,14 +11,19 @@ body {
   max-width: 600px;
   margin: 50px auto;
   padding: 20px;
-  background-color: #fff;
+  /*background-color: #fff;*/
+  background-color: #519A73;
+  /*background-color: rgb(26, 27, 27);*/
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   text-align: center;
-  color: #333;
+  color: #fff;
+  /*color: #519A73;*/
+  font-size: 32px;
+  font-weight: bold;
 }
 
 label {
@@ -27,8 +32,8 @@ label {
 }
 
 input[type="text"] {
-  width: 97%;
-  padding: 8px;
+  width: 100%;
+  padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -48,7 +53,18 @@ button:hover {
 }
 
 p#resultado {
-  margin-top: 20px;
+  /*margin-top: 20px;*/
   font-weight: bold;
 }
 
+.div_textopredefinido {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 5px 0px 5px 0px;
+}
+
+.texto_blanco {
+  color: white;
+}
