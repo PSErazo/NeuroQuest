@@ -94,6 +94,12 @@ export class TypingComponent implements OnInit {
         this.resultado =
           'El texto ingresado no coincide con el texto predefinido.';
       }
+
+      const campoTexto = document.getElementById('textoUsuario') as HTMLInputElement;
+      if (campoTexto) {
+        campoTexto.disabled = true;
+      }
+
     }
   }
 
