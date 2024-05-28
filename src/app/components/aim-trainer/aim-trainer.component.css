@@ -1,79 +1,78 @@
-.btn {
-  color: white;
-  cursor: pointer;
-  background-color: transparent;
-  border-color: transparent;
-  padding: 0.5rem 1rem;
-  font-size: 1.5rem;
-}
-
-.screen {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 100vh;
-  width: 100%;
-  background-color: rgb(43, 135, 209);
-}
-
-.screen.up {
-  margin-top: -100vh;
+.container-circles {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #1A1B1B;
+  height: 94%;
+  position: relative;
 }
 
 .stats {
-  display: flex;
+  height: 6%;
+  max-width: 1000px;
+  margin: 0 auto;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.stats div {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  color: #519A73;
 }
 
-.stats div span {
-  margin-left: 10px;
-  color: white;
-}
-
-.board {
+.hits-area {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-  flex: 1;
-  background-color: rgb(52, 127, 188);
-  overflow: hidden;
-}
-
-.options {
-  width: 100%;
-  display: flex;
-  padding: 20px;
-  justify-content: center;
 }
 
 .circle {
-  width: 75px;
-  height: 75px;
-  position: absolute;
-  background-color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: solid 2px;
   border-radius: 50%;
+  background-color: #1A1B1B;
+  border-color: #519A73;
+  height: 75px;
+  width: 75px;
   cursor: pointer;
 }
 
-.results {
+.circle .second {
+  position: absolute;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-bottom: 20px;
+  border: solid 2px;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background-color: #519A73;
+  border-color: #1A1B1B;
 }
 
+.circle .third {
+  position: absolute;
+  border: solid 2px;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  background-color: #1A1B1B;
+  border-color: #1A1B1B;
+}
+
+.line1 {
+  position: absolute;
+  border: solid 1px;
+  border-color: #519A73;
+  height: 72px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.line2 {
+  position: absolute;
+  border: solid 1px;
+  width: 72px;
+  border-color: #519A73;
+  z-index: 1;
+  pointer-events: none;
+}
