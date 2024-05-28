@@ -1,21 +1,21 @@
-<div class="screen">
-  <h1>Aim Trainer</h1>
-  <button class="btn" id="start">Empezar</button>
-</div>
-<div class="screen">
+<section class="bg-[#1A1B1B] w-screen h-[60vh]">
   <div class="stats">
-    <div class="info">
-      <p>Tiempo: <span id="time">00:00</span></p>
-      <p>Restantes: <span id="hits">30</span></p>
+    <app-timer
+    [timerState] = "timerState" class="timer">
+    </app-timer>
+    <div class="hits-area">
+      <div>FALTANTES:&nbsp;</div>
+      <div class="hits">30</div>
     </div>
   </div>
-  <div class="board" id="board"></div>
-</div>
-<div class="screen">
-  <h1>Terminó</h1>
-  <div class="results">
-    <p>Tiempo Total: <span id="time-over">00:00</span></p>
-    <p>Objetivo por Segundo: <span id="persecond-over">00:00</span></p>
+  <div class="container-circles">
+    <div class="circle" (click)="validateClick($event)">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="circle second">
+        <div class="circle third">  
+        </div>
+      </div>
+    </div>
   </div>
-  <button class="btn restart">Reiniciar</button>
-</div>
+</section>
