@@ -1,10 +1,12 @@
-<section class="bg-[#1A1B1B] w-screen h-[60vh]">
+<section class="bg-[#1A1B1B ] w-screen h-[60vh]">
   <div class="h-full flex flex-col justify-center items-center">
     <shared-level
       [level]="level"
-      [hearts]="hearts"
       class="text-center mb-2"
     ></shared-level>
+    <app-lifes
+       [lifes] = "hearts"
+       class="text-center mb-2"></app-lifes>
     <ul class="grid grid-cols-3 gap-4 size-auto w-80 h-80">
       <li
         *ngFor="let quadrate of quadrates"
