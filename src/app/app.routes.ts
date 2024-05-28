@@ -36,3 +36,4 @@ export const routes: Routes = [
     component: VisualMemoryComponent,
   },
 ];
+

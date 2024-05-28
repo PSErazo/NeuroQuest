@@ -1,21 +1,20 @@
-<main>
-  <section class="container-section">
-    <div class="container-level-lifes">
-      <div class="container-level">
-        <h3>Level</h3>
-        <p></p>
-      </div>
-
-      <div class="container-livesandheart">
-        <h3>Lives</h3>
-        <ul>
-          <li><i class="fa-solid fa-heart"></i></li>
-          <li><i class="fa-solid fa-heart"></i></li>
-          <li><i class="fa-solid fa-heart"></i></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="container containerfijo"></div>
-  </section>
-</main>
+<section class="bg-[#1A1B1B ] w-screen h-[60vh]">
+  <div class="h-full flex flex-col justify-center items-center">
+    <shared-level
+      [level]="level"
+      class="text-center mb-2"
+    ></shared-level>
+    <app-lifes
+       [lifes] = "lifes"
+       class="text-center mb-2"></app-lifes>
+    <ul class="grid grid-cols-3 gap-4 size-auto w-80 h-80">
+      <li
+        *ngFor="let quadrate of quadrates"
+        class="bloque bg-[#519A73] rounded-lg drop-shadow-lg"
+        (click)="validate(quadrate, $event)" 
+      >
+        <span class="hidden">{{ quadrate }}</span>
+      </li>
+    </ul>
+  </div>
+</section>

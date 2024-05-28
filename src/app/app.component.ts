@@ -50,5 +50,7 @@ export class AppComponent {
       name: 'Reaction Time',
       router: '/reactiontime',
     },
+
+
   ];
 }
