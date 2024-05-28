@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VisualmemoryComponent } from './visualmemory.component';
+import { LifesComponent } from './lifes.component';
 
-describe('VisualmemoryComponent', () => {
-  let component: VisualmemoryComponent;
-  let fixture: ComponentFixture<VisualmemoryComponent>;
+describe('LifesComponent', () => {
+  let component: LifesComponent;
+  let fixture: ComponentFixture<LifesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VisualmemoryComponent]
+      imports: [LifesComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(VisualmemoryComponent);
+    fixture = TestBed.createComponent(LifesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

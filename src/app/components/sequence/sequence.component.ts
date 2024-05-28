@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { LevelComponent } from '../../shared/level/level.component';
+import { LifesComponent } from '../../shared/lifes/lifes.component';
 
 @Component({
   selector: 'sequence-game',
   standalone: true,
-  imports: [CommonModule, LevelComponent],
+  imports: [CommonModule, LevelComponent,LifesComponent],
   templateUrl: './sequence.component.html',
   styleUrl: './sequence.component.css',
 })
@@ -17,7 +18,7 @@ export class SequenceComponent implements OnInit {
 
   level: number = 0;
   id: number = 0;
-  hearts: string[] = ['🤍', '🤍', '🤍'];
+  hearts:number = 3
 
   ngOnInit(): void {
     this.levelUp();
@@ -27,7 +28,7 @@ export class SequenceComponent implements OnInit {
     this.level = 0;
     this.id = 0;
     this.randomCorrect = [];
-    this.hearts = ['🤍', '🤍', '🤍'];
+    this.hearts = 3
     this.levelUp();
   }
 
@@ -49,7 +50,7 @@ export class SequenceComponent implements OnInit {
       return this.generateRandom(numberBefore);
     }
     numberBefore = x;
-    console.log('generateRandom p asando if', x);
+    console.log('generateRandom pasando if', x);
     return x;
   }
 
@@ -108,8 +109,8 @@ export class SequenceComponent implements OnInit {
         this.deshabilitar(quadrate - 1, 'fadeInError');
       }, 300);
       console.log('error');
-      this.hearts.pop();
-      if (this.hearts.length < 1) {
+      this.hearts--;
+      if (this.hearts < 1) {
         Swal.fire({
           title: 'GAME OVER',
           confirmButtonText: 'Reset Game',

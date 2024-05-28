@@ -31,4 +31,9 @@ export const routes: Routes = [
     path: 'reactiontime',
     component: ReactionTimeComponent,
   },
+  {
+    path: 'visualmemory',
+    component: VisualMemoryComponent,
+  },
 ];
+

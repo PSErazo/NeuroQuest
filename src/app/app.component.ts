@@ -51,10 +51,6 @@ export class AppComponent {
       router: '/reactiontime',
     },
 
-    {
-      name: 'Visual Memory',
-      router: '/visualmemory',
-    },
 
   ];
 }
