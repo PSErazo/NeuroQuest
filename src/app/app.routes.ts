@@ -8,6 +8,7 @@ import { VisualMemoryComponent } from './components/visual-memory/visual-memory.
 import { gameRoutes } from './pages/games/games.routes';
 import { LoginComponent } from './pages/login/login.component';
 import { GamesComponent } from './pages/games/games.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 export const routes: Routes = [
   {
@@ -22,5 +23,9 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'singup',
+    component: SignUpComponent,
   },
 ];

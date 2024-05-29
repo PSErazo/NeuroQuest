@@ -1,10 +1,7 @@
 <section class="bg-[#1A1B1B] w-screen h-[60vh]">
-  
   @if(estadoComponente){
   <div class="stats">
-    <app-timer
-    [timerState] = "timerState" class="timer">
-    </app-timer>
+    <app-timer [timerState]="timerState" class="timer"> </app-timer>
     <div class="hits-area">
       <div>FALTANTES:&nbsp;</div>
       <div class="hits">30</div>
@@ -15,14 +12,15 @@
       <div class="line1"></div>
       <div class="line2"></div>
       <div class="circle second">
-        <div class="circle third">  
-        </div>
+        <div class="circle third"></div>
       </div>
     </div>
   </div>
   }@else{
-  <app-startgame [name]="name" [text]="text" (messageEvent)="receivingState($event)"></app-startgame>
+  <app-startgame
+    [name]="name"
+    [text]="text"
+    (messageEvent)="receivingState($event)"
+  ></app-startgame>
   }
-
-
 </section>

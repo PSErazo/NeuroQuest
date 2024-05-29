@@ -6,28 +6,27 @@ import { elementAt, generate } from 'rxjs';
 import { query } from '@angular/animations';
 import { StartgameComponent } from '../../shared/startgame/startgame.component';
 
-
 @Component({
   selector: 'app-visual-memory',
   standalone: true,
-  imports: [CommonModule,LevelComponent,LifesComponent,StartgameComponent],
+  imports: [CommonModule, LevelComponent, LifesComponent, StartgameComponent],
   templateUrl: './visual-memory.component.html',
   styleUrl: './visual-memory.component.css',
 })
-export class VisualMemoryComponent{
-//array de bloques pintados
-  name:string = "Visual Memory";
-  text:string = "Memoriza los bloques";
+export class VisualMemoryComponent {
+  //array de bloques pintados
+  name: string = 'Visual Memory';
+  text: string = 'Memoriza los bloques';
 
-  quadrates: number[] = [1,2,3,4,5,6,7,8,9]
+  quadrates: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   numeroBloques: number = 9;
-//array de valores que se asignaran a cada bloque 
+  //array de valores que se asignaran a cada bloque
   valores: number[] = [];
-//array de numeros random que se generaran 
-  numerosrandom: number[] = []
-//tope de bloques elegibles 
-  bloqueselegibles: number = 3
-//contador de niveles
+  //array de numeros random que se generaran
+  numerosrandom: number[] = [];
+  //tope de bloques elegibles
+  bloqueselegibles: number = 3;
+  //contador de niveles
   level: number = 1;
   //etiquetas fijas
   lifes: number = 3;
@@ -36,58 +35,58 @@ export class VisualMemoryComponent{
   contadoradicionbloques: number = 7;
   columns: number = 3;
   gap: number = 4;
-  aciertos = 0
-  errados = 0
-  pintadosCorrectos:HTMLElement[] = []
+  aciertos = 0;
+  errados = 0;
+  pintadosCorrectos: HTMLElement[] = [];
   pintadosErroneos: HTMLElement[] = [];
   estadoComponente: boolean = false;
 
-
-  
-
-  startGame(){
-    this.generateRandom()
-    this.paintRandom()
+  startGame() {
+    this.generateRandom();
+    this.paintRandom();
   }
 
-  receivingState(estate:boolean):void{
+  receivingState(estate: boolean): void {
     if (estate) {
-      this.estadoComponente = estate
+      this.estadoComponente = estate;
       this.startGame();
     }
   }
 
-
-  //Generar los numeros(bloques) que se elegiran 
-  generateRandom(){
-    console.log(`se generaran los random ${this.bloqueselegibles}veces`)
+  //Generar los numeros(bloques) que se elegiran
+  generateRandom() {
+    console.log(`se generaran los random ${this.bloqueselegibles}veces`);
     for (let i = 0; this.numerosrandom.length < this.bloqueselegibles; i++) {
       //se generara un numero random del 1 al numero de bloques
-      let numerorandom: number = Math.floor(Math.random() * this.numeroBloques) + 1;
+      let numerorandom: number =
+        Math.floor(Math.random() * this.numeroBloques) + 1;
       //al array numerosrandom se hara un filtro(cada elemento se compara con el numero random generado, si no es igual se devolvera los valores que se repiten)
-      let valorrepetido: number[] | null = this.numerosrandom.filter(value => value === numerorandom);
+      let valorrepetido: number[] | null = this.numerosrandom.filter(
+        (value) => value === numerorandom
+      );
       //si el numero generado no se repite
       if (valorrepetido.length === 0) {
         //a numerosrandom se le agregara el numerorandom generado
         this.numerosrandom.push(numerorandom);
-        console.log(numerorandom)
+        console.log(numerorandom);
       }
     }
-    this.paintRandom()
+    this.paintRandom();
   }
- //Se pintan los bloques que tengan como valor el mismo de los random
-  paintRandom(){
+  //Se pintan los bloques que tengan como valor el mismo de los random
+  paintRandom() {
     //8 milisegundos
     setTimeout(() => {
       let bloques = document.querySelectorAll('.bloque');
       bloques.forEach((bloque) => {
-        let valorBloque: string | undefined = bloque.querySelector('span')?.textContent ?? undefined;
+        let valorBloque: string | undefined =
+          bloque.querySelector('span')?.textContent ?? undefined;
         if (valorBloque !== undefined) {
           const valorNumero = parseInt(valorBloque);
           if (this.numerosrandom.includes(valorNumero)) {
-            bloque.classList.add(`bg-[#ffffff]`)
+            bloque.classList.add(`bg-[#ffffff]`);
             setTimeout(() => {
-              bloque.classList.remove(`bg-[#ffffff]`)
+              bloque.classList.remove(`bg-[#ffffff]`);
             }, 800);
           }
         }
@@ -95,211 +94,178 @@ export class VisualMemoryComponent{
     }, 500);
   }
 
-   validate(quadrate:number,event: MouseEvent){
-    
+  validate(quadrate: number, event: MouseEvent) {
+    const target: HTMLElement = event.target as HTMLElement;
 
-    const target:HTMLElement = event.target as HTMLElement;
-    
-    if(this.numerosrandom.includes(quadrate)){
-        target.classList.add(`bg-[#ffffff]`)
-        this.aciertos++
-        
-        this.pintadosCorrectos.push(target)
-    
-        if(this.bloqueselegibles === this.aciertos){
+    if (this.numerosrandom.includes(quadrate)) {
+      target.classList.add(`bg-[#ffffff]`);
+      this.aciertos++;
 
-          setTimeout(() =>{
-            this.pintadosCorrectos.forEach(element => {
-              element.classList.remove(`bg-[#ffffff]`)
-            });
-  
-            this.pintadosErroneos.forEach(element =>{
-              element.classList.remove(`bg-[#214d35]`)
-            })
-            this.level++;
-            this.numerosrandom = [];
-            this.aciertos = 0;
-            if(this.level < 31){
-             this.bloqueselegibles++ 
-            }
-            this.pintadosCorrectos = []
-            this.pintadosErroneos = []
-            this.levelUp()
-          },500)
-        }
-    }else{
-     
-      target.classList.add(`bg-[#214d35]`)
-      this.pintadosErroneos.push(target)
-    
-     
-      this.errados++
+      this.pintadosCorrectos.push(target);
 
-      //Si llegas a tres errados por nivel
-      if(this.errados === 3){
+      if (this.bloqueselegibles === this.aciertos) {
         setTimeout(() => {
-
-          this.pintadosCorrectos.forEach(element => {
-            element.classList.remove(`bg-[#ffffff]`)
+          this.pintadosCorrectos.forEach((element) => {
+            element.classList.remove(`bg-[#ffffff]`);
           });
 
-          this.pintadosErroneos.forEach(element =>{
-            element.classList.remove(`bg-[#214d35]`)
-          })
-          
-
-          
-           this.heart--
-            let life: HTMLElement = document.querySelectorAll('.fa-solid')[this.heart] as HTMLElement
-            life.style.color = '#000000'
-          
-
-          document.querySelector('.fa-heart')
-         
-          if(this.heart === 0){
-          this.level = 1;
+          this.pintadosErroneos.forEach((element) => {
+            element.classList.remove(`bg-[#214d35]`);
+          });
+          this.level++;
           this.numerosrandom = [];
           this.aciertos = 0;
-          this.errados = 0;
-          this.pintadosCorrectos = []
-          this.pintadosErroneos = []
-          this.heart = 3;
-          
-          setTimeout(()=>{
-            for (let i = 0; i < this.heart; i++) {
-              let life: HTMLElement = document.querySelectorAll('.fa-solid')[i] as HTMLElement
-              life.style.color = '#ffffff'
-            }
-          },500)
+          if (this.level < 31) {
+            this.bloqueselegibles++;
+          }
+          this.pintadosCorrectos = [];
+          this.pintadosErroneos = [];
+          this.levelUp();
+        }, 500);
+      }
+    } else {
+      target.classList.add(`bg-[#214d35]`);
+      this.pintadosErroneos.push(target);
 
-          this.restartGame()
-          //si solo erras 
-          }else{
+      this.errados++;
+
+      //Si llegas a tres errados por nivel
+      if (this.errados === 3) {
+        setTimeout(() => {
+          this.pintadosCorrectos.forEach((element) => {
+            element.classList.remove(`bg-[#ffffff]`);
+          });
+
+          this.pintadosErroneos.forEach((element) => {
+            element.classList.remove(`bg-[#214d35]`);
+          });
+
+          this.heart--;
+          let life: HTMLElement = document.querySelectorAll('.fa-solid')[
+            this.heart
+          ] as HTMLElement;
+          life.style.color = '#000000';
+
+          document.querySelector('.fa-heart');
+
+          if (this.heart === 0) {
+            this.level = 1;
             this.numerosrandom = [];
             this.aciertos = 0;
             this.errados = 0;
-            this.pintadosCorrectos = []
-            this.pintadosErroneos = []
-            this.generateRandom()
-          }
-      
+            this.pintadosCorrectos = [];
+            this.pintadosErroneos = [];
+            this.heart = 3;
 
-        },500)
-     
+            setTimeout(() => {
+              for (let i = 0; i < this.heart; i++) {
+                let life: HTMLElement = document.querySelectorAll('.fa-solid')[
+                  i
+                ] as HTMLElement;
+                life.style.color = '#ffffff';
+              }
+            }, 500);
+
+            this.restartGame();
+            //si solo erras
+          } else {
+            this.numerosrandom = [];
+            this.aciertos = 0;
+            this.errados = 0;
+            this.pintadosCorrectos = [];
+            this.pintadosErroneos = [];
+            this.generateRandom();
+          }
+        }, 500);
       }
     }
-   } 
+  }
 
-   levelUp(){
-
+  levelUp() {
     //Si el nivel al que pasas es igual a 3 menor que 12
-    if(this.level % 3 === 0  && this.level < 12){
-      if(this.level === 3){
-        this.quadrates = []
+    if (this.level % 3 === 0 && this.level < 12) {
+      if (this.level === 3) {
+        this.quadrates = [];
         this.numeroBloques += this.contadoradicionbloques;
-        this.columns++
-        
-         
-        let container: HTMLElement = document.querySelector('.grid')!
-        
-       container.classList.remove('grid-cols-3')
-       container.classList.add(`grid-cols-${this.columns}`)
-  
-       
+        this.columns++;
 
-       for(let i:number = 1; i <= this.numeroBloques; i++){
-          this.quadrates.push(i)
-          
-       }
-       console.log(this.quadrates)
-  
-  
-        this.generateRandom()
+        let container: HTMLElement = document.querySelector('.grid')!;
+
+        container.classList.remove('grid-cols-3');
+        container.classList.add(`grid-cols-${this.columns}`);
+
+        for (let i: number = 1; i <= this.numeroBloques; i++) {
+          this.quadrates.push(i);
+        }
+        console.log(this.quadrates);
+
+        this.generateRandom();
         //si es el nivel 6 o 9
-      }else{
-          this.quadrates = []
-          this.contadoradicionbloques += 2
-          this.numeroBloques += this.contadoradicionbloques
-          this.columns++
-          this.gap--
-          let container: HTMLElement = document.querySelector('.grid')!
-          
-          // se cambian aumentan las columnas mediante las clases 
-          container.classList.remove(`grid-cols-${this.columns-1}`)
-          container.classList.add(`grid-cols-${this.columns}`)
-
-          
-
-          container.classList.remove(`gap-${this.gap+1}`)
-          container.classList.add(`gap-${this.gap}`)
-
-          for(let i:number = 1; i <= this.numeroBloques; i++){
-            this.quadrates.push(i)
-            
-         }
-
-
-          this.generateRandom()
-
-      }
-    }else{
-      //si es el nivel 14
-      if(this.level === 14){
-        this.quadrates = []
-        this.contadoradicionbloques += 2
+      } else {
+        this.quadrates = [];
+        this.contadoradicionbloques += 2;
         this.numeroBloques += this.contadoradicionbloques;
-        this.columns++
-        this.gap--
-        let container: HTMLElement = document.querySelector('.grid')!
-        
-        container.classList.remove('grid-cols-3')
-        container.classList.add(`grid-cols-${this.columns}`)
-         
-        container.classList.remove(`gap-${this.gap+1}`)
-        container.classList.add(`gap-${this.gap}`)
+        this.columns++;
+        this.gap--;
+        let container: HTMLElement = document.querySelector('.grid')!;
 
-        for(let i:number = 1; i <= this.numeroBloques; i++){
-           this.quadrates.push(i)
-           
+        // se cambian aumentan las columnas mediante las clases
+        container.classList.remove(`grid-cols-${this.columns - 1}`);
+        container.classList.add(`grid-cols-${this.columns}`);
+
+        container.classList.remove(`gap-${this.gap + 1}`);
+        container.classList.add(`gap-${this.gap}`);
+
+        for (let i: number = 1; i <= this.numeroBloques; i++) {
+          this.quadrates.push(i);
         }
 
-        this.generateRandom()
-
-        //si es el nivel 1 2 4 5 7 8 10 11 12 13 15 
-      }else{
-    
-        this.generateRandom()
+        this.generateRandom();
       }
-   
-    
-    
+    } else {
+      //si es el nivel 14
+      if (this.level === 14) {
+        this.quadrates = [];
+        this.contadoradicionbloques += 2;
+        this.numeroBloques += this.contadoradicionbloques;
+        this.columns++;
+        this.gap--;
+        let container: HTMLElement = document.querySelector('.grid')!;
 
+        container.classList.remove('grid-cols-3');
+        container.classList.add(`grid-cols-${this.columns}`);
+
+        container.classList.remove(`gap-${this.gap + 1}`);
+        container.classList.add(`gap-${this.gap}`);
+
+        for (let i: number = 1; i <= this.numeroBloques; i++) {
+          this.quadrates.push(i);
+        }
+
+        this.generateRandom();
+
+        //si es el nivel 1 2 4 5 7 8 10 11 12 13 15
+      } else {
+        this.generateRandom();
+      }
     }
+  }
+  restartGame() {
+    let container: HTMLElement = document.querySelector('.grid')!;
+    container.classList.remove(`grid-cols-${this.columns}`);
+    console.log('el gap al restablecer el juego es' + this.gap);
+    container.classList.remove(`gap-${this.gap}`);
 
-   }
-   restartGame(){
-    let container: HTMLElement = document.querySelector('.grid')!
-    container.classList.remove(`grid-cols-${this.columns}`)
-    console.log("el gap al restablecer el juego es" + this.gap)
-    container.classList.remove(`gap-${this.gap}`)
+    this.columns = 3;
+    this.bloqueselegibles = 3;
+    this.numeroBloques = 9;
+    this.contadoradicionbloques = 7;
+    this.gap = 4;
+    this.quadrates = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-    this.columns = 3
-    this.bloqueselegibles = 3
-    this.numeroBloques = 9
-    this.contadoradicionbloques = 7
-    this.gap = 4
-    this.quadrates = [1,2,3,4,5,6,7,8,9]
-   
-        
-    
-    container.classList.add(`grid-cols-${this.columns}`)
-    
-    container.classList.add(`gap-${this.gap}`)
-    this.generateRandom()
-   }
+    container.classList.add(`grid-cols-${this.columns}`);
 
-   
-
-
-
+    container.classList.add(`gap-${this.gap}`);
+    this.generateRandom();
+  }
 }
