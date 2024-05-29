@@ -11,7 +11,8 @@
     "delete:dist": "del dist",
     "copy:dist": "copyfiles dist/neuro-quest/browser/* ./docs -f ",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test2": "ng test"
   },
   "private": true,
   "dependencies": {
