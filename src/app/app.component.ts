@@ -4,6 +4,8 @@ import { NavComponent } from './shared/nav/nav.component';
 import { ButtonComponent } from './shared/buttons/button.component';
 import { SequenceComponent } from './components/sequence/sequence.component';
 import { CommonModule } from '@angular/common';
+import { GamesComponent } from './pages/games/games.component';
+import { LoginComponent } from './pages/login/login.component';
 
 interface games {
   name: string;
@@ -20,37 +22,10 @@ interface games {
     ButtonComponent,
     SequenceComponent,
     RouterLink,
+    GamesComponent,
+    LoginComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
-  games: games[] = [
-    {
-      name: 'Sequence Memory',
-      router: '/sequencememory',
-    },
-    {
-      name: 'Visual Memory',
-      router: '/visualmemory',
-    },
-    {
-      name: 'Typing',
-      router: '/typing',
-    },
-    {
-      name: 'Aim Trainer',
-      router: '/aimtrainer',
-    },
-    {
-      name: 'Number Memory',
-      router: '/numbermemory',
-    },
-    {
-      name: 'Reaction Time',
-      router: '/reactiontime',
-    },
-
-
-  ];
-}
+export class AppComponent {}
