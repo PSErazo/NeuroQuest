@@ -41,6 +41,7 @@ export class VisualMemoryComponent{
   pintadosCorrectos:HTMLElement[] = []
   pintadosErroneos: HTMLElement[] = [];
   estadoComponente: boolean = false;
+  icono:string = "";
 
 
   

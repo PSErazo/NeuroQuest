@@ -16,7 +16,6 @@ export class StartgameComponent {
 
   cambiarEstado(){
     this.messageEvent.emit(true)
-    
   }
 
 }
