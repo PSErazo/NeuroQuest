@@ -1,9 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { StartgameComponent } from '../../shared/startgame/startgame.component';
 
 @Component({
   selector: 'app-reaction-time',
   standalone: true,
-  imports: [],
+  imports: [StartgameComponent],
   templateUrl: './reaction-time.component.html',
   styleUrl: './reaction-time.component.css',
 })
@@ -13,12 +15,26 @@ export class ReactionTimeComponent implements OnInit {
   boxText: HTMLElement | null = null;
   startTime: number = 0; // Inicializar con un valor predeterminado
   endTime: number = 0; // Inicializar con un valor predeterminado
-
+  estadoComponente: boolean = false;
+  name:string = "Reaction Time";
+  text:string="Cuando la pantalla cambie a verde, dale click en cualquier parte del cuadro"
   constructor() {}
 
   ngOnInit() {
+   
+  }
+
+  initGame(){
     this.startGame();
   }
+
+  receivingState(estate:boolean):void{
+    if (estate) {
+      this.estadoComponente = estate
+      this.initGame();
+    }
+  }
+  
 
   startGame() {
     this.box = document.getElementById('box') as HTMLElement;

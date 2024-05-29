@@ -3,19 +3,22 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { LevelComponent } from '../../shared/level/level.component';
 import { LifesComponent } from '../../shared/lifes/lifes.component';
+import { StartgameComponent } from '../../shared/startgame/startgame.component';
 
 @Component({
   selector: 'sequence-game',
   standalone: true,
-  imports: [CommonModule, LevelComponent,LifesComponent],
+  imports: [CommonModule, LevelComponent,LifesComponent,StartgameComponent],
   templateUrl: './sequence.component.html',
   styleUrl: './sequence.component.css',
 })
 export class SequenceComponent implements OnInit {
   quadrates: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
+  estadoComponente: boolean = false;
+  icono:string = "assets/sequence.svg";
   randomCorrect: number[] = [];
-
+  name:string = "Sequence Memory";
+  text:string = "Memoriza la secuencia";
   level: number = 0;
   id: number = 0;
   hearts:number = 3
@@ -121,4 +124,9 @@ export class SequenceComponent implements OnInit {
     }
     console.log('validateClick', quadrate);
   }
+
+  receivingState(estate:boolean):void{
+    this.estadoComponente = estate;
+  }
+
 }

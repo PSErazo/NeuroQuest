@@ -1,76 +1,98 @@
 import { Component } from '@angular/core';
+import { StartgameComponent } from '../../shared/startgame/startgame.component';
 
 @Component({
   selector: 'app-number-memory',
   standalone: true,
-  imports: [],
+  imports: [StartgameComponent],
   templateUrl: './number-memory.component.html',
   styleUrl: './number-memory.component.css',
 })
 export class NumberMemoryComponent {
   level = 1;
   numberToRemember: number = 0;
+  name:string = "Number Memory"
+  text:string = "Recuerda todos los numeros que se mostraran";
+  estadoComponente:boolean = false;
 
   ngOnInit() {
+
+  }
+
+
+   startGame(){
     if (typeof document !== 'undefined') {
-      document.getElementById('start-button')!.addEventListener('click', () => {
-        this.transitionScreens('start-screen', 'number-screen');
-        this.displayNumber();
+  
+      this.transitionScreens('start-screen', 'number-screen');
+      this.displayNumber();
+    ;
+
+    const submitHandler = () => {
+      const userInput = (
+        document.getElementById('user-input') as HTMLInputElement
+      ).value;
+      document.getElementById('correct-number')!.textContent =
+        this.numberToRemember.toString();
+      document.getElementById('user-answer')!.textContent = userInput;
+      document.getElementById('current-level')!.textContent =
+        this.level.toString();
+
+      this.transitionScreens('input-screen', 'result-screen');
+
+      if (userInput === this.numberToRemember.toString()) {
+        document.getElementById('next-level-button')!.style.display = 'block';
+        this.level++;
+      } else {
+        document.getElementById('next-level-button')!.style.display = 'none';
+        this.level = 1;
+      }
+
+      (document.getElementById('user-input') as HTMLInputElement).value = '';
+    };
+
+    document
+      .getElementById('submit-button')!
+      .addEventListener('click', submitHandler);
+
+    // Escucha el evento keypress en el campo de entrada
+    document
+      .getElementById('user-input')!
+      .addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+          submitHandler();
+        }
       });
 
-      const submitHandler = () => {
-        const userInput = (
-          document.getElementById('user-input') as HTMLInputElement
-        ).value;
-        document.getElementById('correct-number')!.textContent =
-          this.numberToRemember.toString();
-        document.getElementById('user-answer')!.textContent = userInput;
+    document
+      .getElementById('try-again-button')!
+      .addEventListener('click', () => {
+        this.level = 1;
+        this.transitionScreens('result-screen', 'start-screen');
+      });
+
+    document
+      .getElementById('next-level-button')!
+      .addEventListener('click', () => {
         document.getElementById('current-level')!.textContent =
           this.level.toString();
+        this.transitionScreens('result-screen', 'number-screen');
+        this.displayNumber();
+      });
+  }
+   }
 
-        this.transitionScreens('input-screen', 'result-screen');
 
-        if (userInput === this.numberToRemember.toString()) {
-          document.getElementById('next-level-button')!.style.display = 'block';
-          this.level++;
-        } else {
-          document.getElementById('next-level-button')!.style.display = 'none';
-          this.level = 1;
-        }
-
-        (document.getElementById('user-input') as HTMLInputElement).value = '';
-      };
-
-      document
-        .getElementById('submit-button')!
-        .addEventListener('click', submitHandler);
-
-      // Escucha el evento keypress en el campo de entrada
-      document
-        .getElementById('user-input')!
-        .addEventListener('keypress', (event) => {
-          if (event.key === 'Enter') {
-            submitHandler();
-          }
-        });
-
-      document
-        .getElementById('try-again-button')!
-        .addEventListener('click', () => {
-          this.level = 1;
-          this.transitionScreens('result-screen', 'start-screen');
-        });
-
-      document
-        .getElementById('next-level-button')!
-        .addEventListener('click', () => {
-          document.getElementById('current-level')!.textContent =
-            this.level.toString();
-          this.transitionScreens('result-screen', 'number-screen');
-          this.displayNumber();
-        });
+  receivingState(estate:boolean):void{
+    if (estate) {
+      this.estadoComponente = estate
+      this.startGame();
     }
   }
+
+
+
+
+
 
   displayNumber() {
     const digits = Math.min(this.level, 9); // Máximo de 9 dígitos

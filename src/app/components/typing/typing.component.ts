@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { StartgameComponent } from '../../shared/startgame/startgame.component';
 
 @Component({
   selector: 'app-typing',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,StartgameComponent],
   templateUrl: './typing.component.html',
   styleUrl: './typing.component.css',
 })
@@ -16,6 +17,24 @@ export class TypingComponent implements OnInit {
   tiempo: string = '';
   startTime!: number;
   endTime!: number;
+  name:string = "Typing";
+  text:string = "Cuantas palabras por minuto puedes tipear?"
+  estadoComponente:boolean = false;
+ 
+
+  startGame(){
+    this.textoPredefinido = this.generarTextoAleatorio(
+      this.generarNumeroAleatorio()
+    );
+  }
+
+  receivingState(estate:boolean):void{
+    if (estate) {
+      this.estadoComponente = estate
+      this.startGame();
+    }
+  }
+
 
   textos = [
     'Pedro picapiedra',
@@ -45,9 +64,7 @@ export class TypingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.textoPredefinido = this.generarTextoAleatorio(
-      this.generarNumeroAleatorio()
-    );
+   
   }
 
   onKeyDown() {
