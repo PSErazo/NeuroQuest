@@ -10,6 +10,7 @@ import { LoginComponent } from './pages/login/login.component';
 interface games {
   name: string;
   router: string;
+  text: string;
 }
 
 @Component({

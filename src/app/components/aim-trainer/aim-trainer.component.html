@@ -1,4 +1,6 @@
 <section class="bg-[#1A1B1B] w-screen h-[60vh]">
+  
+  @if(estadoComponente){
   <div class="stats">
     <app-timer
     [timerState] = "timerState" class="timer">
@@ -18,4 +20,9 @@
       </div>
     </div>
   </div>
+  }@else{
+  <app-startgame [name]="name" [text]="text" (messageEvent)="receivingState($event)"></app-startgame>
+  }
+
+
 </section>

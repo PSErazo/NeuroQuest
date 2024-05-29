@@ -1,10 +1,23 @@
 <section class="bg-[#1A1B1B] w-screen h-[60vh]">
+ 
+ 
+ @if(estadoComponente){
   <div class="h-full flex flex-col justify-center items-center">
-    <shared-level [level]="level" class="text-center mb-2"></shared-level>
-    <app-lifes [lifes]="hearts" class="text-center mb-2"></app-lifes>
+    <div class="flex flex-row gap-5">
+      <shared-level
+      [level]="level"
+      class="text-center mb-2"
+    ></shared-level>
+    <app-lifes
+       [lifes] = "hearts"
+       class="text-center mb-2"></app-lifes>
+
+    </div>
+ 
     <ul class="grid grid-cols-3 gap-4 size-auto w-80 h-80">
       <li
         *ngFor="let quadrate of quadrates"
+        class="quadrate bg-[#519A73] rounded-lg drop-shadow-lg cursor-pointer"
         class="quadrate bg-[#519A73] rounded-lg drop-shadow-lg cursor-pointer"
         (click)="validateClick(quadrate)"
       >
@@ -12,6 +25,10 @@
       </li>
     </ul>
   </div>
+ }@else(){
+  <app-startgame [name]="name" [text]="text" [icono]="icono" (messageEvent)="receivingState($event)"></app-startgame>
+ }
+ 
 </section>
 
 <!-- <div>{{ this.randomCorrect }}</div> -->

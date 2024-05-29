@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { StartgameComponent } from '../../shared/startgame/startgame.component';
 
 @Component({
   selector: 'app-typing',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,StartgameComponent],
   templateUrl: './typing.component.html',
   styleUrl: './typing.component.css',
 })
@@ -16,13 +17,31 @@ export class TypingComponent implements OnInit {
   tiempo: string = '';
   startTime!: number;
   endTime!: number;
+  name:string = "Typing";
+  text:string = "Cuantas palabras por minuto puedes tipear?"
+  estadoComponente:boolean = false;
+ 
+
+  startGame(){
+    this.textoPredefinido = this.generarTextoAleatorio(
+      this.generarNumeroAleatorio()
+    );
+  }
+
+  receivingState(estate:boolean):void{
+    if (estate) {
+      this.estadoComponente = estate
+      this.startGame();
+    }
+  }
+
 
   textos = [
     'Pedro picapiedra',
     'Vilma de Oliva',
     'Pebels Picapiedra de Oliva',
     'Betty Pechugona',
-    'Pablo Marmolino y  Chaparro',
+    'Pablo Marmolino y Chaparro',
     /*'La Luna brilla en el cielo nocturno, iluminando suavemente la tierra. Sus cráteres y mares son testigos silenciosos de la historia de nuestro mundo. En la antigüedad, era adorada como una deidad, inspirando mitos y leyendas. Hoy, la Luna sigue cautivando nuestra imaginación, recordándonos nuestra conexión con el universo.',
     'En lo profundo del bosque se encuentra un lugar mágico, donde los árboles susurran secretos antiguos y las hadas danzan en la luz filtrada. El aire está lleno de fragancias frescas y el suelo está cubierto de musgo suave. Quienes se aventuran aquí sienten la calma y la maravilla de lo natural.',
     'El viaje del alma es como un río que fluye sin cesar, encontrando su camino a través de la vida. A veces tranquilo, a veces tumultuoso, siempre lleva consigo la sabiduría de las experiencias pasadas. En su curso, el alma crece, aprende y se transforma, buscando su verdadero propósito y destino.',
@@ -45,9 +64,7 @@ export class TypingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.textoPredefinido = this.generarTextoAleatorio(
-      this.generarNumeroAleatorio()
-    );
+   
   }
 
   onKeyDown() {
@@ -94,6 +111,12 @@ export class TypingComponent implements OnInit {
         this.resultado =
           'El texto ingresado no coincide con el texto predefinido.';
       }
+
+      const campoTexto = document.getElementById('textoUsuario') as HTMLInputElement;
+      if (campoTexto) {
+        campoTexto.disabled = true;
+      }
+
     }
   }
 

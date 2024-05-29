@@ -4,16 +4,21 @@ import { LifesComponent } from '../../shared/lifes/lifes.component';
 import { CommonModule } from '@angular/common';
 import { elementAt, generate } from 'rxjs';
 import { query } from '@angular/animations';
+import { StartgameComponent } from '../../shared/startgame/startgame.component';
+
 
 @Component({
   selector: 'app-visual-memory',
   standalone: true,
-  imports: [CommonModule,LevelComponent,LifesComponent],
+  imports: [CommonModule,LevelComponent,LifesComponent,StartgameComponent],
   templateUrl: './visual-memory.component.html',
   styleUrl: './visual-memory.component.css',
 })
-export class VisualMemoryComponent {
+export class VisualMemoryComponent{
 //array de bloques pintados
+  name:string = "Visual Memory";
+  text:string = "Memoriza los bloques";
+
   quadrates: number[] = [1,2,3,4,5,6,7,8,9]
   numeroBloques: number = 9;
 //array de valores que se asignaran a cada bloque 
@@ -35,10 +40,24 @@ export class VisualMemoryComponent {
   errados = 0
   pintadosCorrectos:HTMLElement[] = []
   pintadosErroneos: HTMLElement[] = [];
-  ngOnInit(): void {
+  estadoComponente: boolean = false;
+
+
+  
+
+  startGame(){
     this.generateRandom()
     this.paintRandom()
   }
+
+  receivingState(estate:boolean):void{
+    if (estate) {
+      this.estadoComponente = estate
+      this.startGame();
+    }
+  }
+
+
   //Generar los numeros(bloques) que se elegiran 
   generateRandom(){
     console.log(`se generaran los random ${this.bloqueselegibles}veces`)
@@ -279,6 +298,7 @@ export class VisualMemoryComponent {
     this.generateRandom()
    }
 
+   
 
 
 
