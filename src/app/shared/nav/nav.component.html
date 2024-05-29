@@ -1,13 +1,17 @@
-<nav class="flex flex-row justify-around py-3 text-[#00d288] bg-[#1c2124] w-full">
+<nav
+  class="flex flex-row justify-around py-3 text-[#00d288] bg-[#1c2124] w-full"
+>
   <ul class="flex flex-row text-lg gap-4">
     <li class="flex flex-row">
       <img src="assets/logo.svg" alt="" class="h-10 my-[-5px] mx-3" />
-      <a routerLink="/sequencememory" class="hover:opacity-50">NEUROQUEST</a>
+      <a routerLink="/game/sequencememory" class="hover:opacity-50"
+        >NEUROQUEST</a
+      >
     </li>
     <li class="hover:opacity-50"><a href="">DASHBOARD</a></li>
   </ul>
   <ul class="flex flex-row text-lg gap-4">
-    <li class="hover:opacity-50"><a href="">SIGN UP</a></li>
-    <li class="hover:opacity-50"><a href="">LOGIN</a></li>
+    <li class="hover:opacity-50"><a routerLink="/singup">SIGN UP</a></li>
+    <li class="hover:opacity-50"><a routerLink="/login">LOGIN</a></li>
   </ul>
 </nav>

@@ -5,35 +5,27 @@ import { AimTrainerComponent } from './components/aim-trainer/aim-trainer.compon
 import { NumberMemoryComponent } from './components/number-memory/number-memory.component';
 import { ReactionTimeComponent } from './components/reaction-time/reaction-time.component';
 import { VisualMemoryComponent } from './components/visual-memory/visual-memory.component';
+import { gameRoutes } from './pages/games/games.routes';
+import { LoginComponent } from './pages/login/login.component';
+import { GamesComponent } from './pages/games/games.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: SequenceComponent,
+    component: GamesComponent,
   },
   {
-    path: 'sequencememory',
-    component: SequenceComponent,
+    path: 'game',
+    component: GamesComponent,
+    children: gameRoutes,
   },
   {
-    path: 'typing',
-    component: TypingComponent,
+    path: 'login',
+    component: LoginComponent,
   },
   {
-    path: 'aimtrainer',
-    component: AimTrainerComponent,
-  },
-  {
-    path: 'numbermemory',
-    component: NumberMemoryComponent,
-  },
-  {
-    path: 'reactiontime',
-    component: ReactionTimeComponent,
-  },
-  {
-    path: 'visualmemory',
-    component: VisualMemoryComponent,
+    path: 'singup',
+    component: SignUpComponent,
   },
 ];
-
