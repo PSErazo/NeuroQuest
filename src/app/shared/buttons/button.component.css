@@ -1,0 +1,15 @@
+
+.juego-boton{
+    transition: transform 0.2s ease-in-out 0s, box-shadow 0.2s ease-in-out 0s;
+   
+}
+.juego-boton:hover{
+    transform: translateY(-10px);
+    box-shadow: rgb(198,89,86) 0px 12px 15px;
+}
+
+@media(width > 768px){
+
+
+    
+}

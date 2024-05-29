@@ -1,26 +1,41 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { TimerComponent } from '../../shared/timer/timer.component';
+import { StartgameComponent } from '../../shared/startgame/startgame.component';
 
 @Component({
   selector: 'aim-trainer-game',
   standalone: true,
-  imports: [CommonModule, TimerComponent],
-  templateUrl: './aim-trainer.component.html',
+  imports: [CommonModule, TimerComponent,StartgameComponent],
+  templateUrl:'./aim-trainer.component.html',
   styleUrl: './aim-trainer.component.css',
 })
 
 export class AimTrainerComponent {
 
-  timerState: boolean = false;
+  timerState: boolean = true;
   hits: number = 30;
   interval: any;
-  
-
+  name:string = "Aim Trainer";
+  text:string = "Clickea los 30 objetivos en el menos tiempo posible";
+  estadoComponente:boolean = false;
   ngOnInit(): void {
-    this.createRandomCircle()
-    this.startTimer();
+ 
   }
+
+
+  startGame(){
+       this.createRandomCircle();
+  }
+
+  receivingState(estate:boolean):void{
+    if (estate) {
+      this.estadoComponente = estate
+      this.startGame();
+    }
+  }
+
+
 
   createRandomCircle(): void {    
 
@@ -58,9 +73,7 @@ export class AimTrainerComponent {
     }
   }
 
-  startTimer(): void {
-    this.timerState = true;
-  }
+  
 
   stopTimer(): void {
     this.timerState = false;

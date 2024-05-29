@@ -1,20 +1,26 @@
 <section class="bg-[#1A1B1B] w-screen h-[60vh]">
-  <div class="containertyping">
-    <!-- <div class="bg-[#1A1B1B] w-screen h-[60vh] text-white"> -->
-    <h1>Comparador de Texto</h1>
-    <p>Texto predefinido:</p>
-    <p id="textoPredefinido">{{ textoPredefinido }}</p>
-    <label for="textoUsuario">Ingresa el texto:</label>
-    <input
-      type="text"
-      id="textoUsuario"
-      [(ngModel)]="textoUsuario"
-      (keydown)="onKeyDown()"
-      (keyup)="onKeyUp()"
-      (paste)="preventAction($event)"
-      (copy)="preventAction($event)"
-    />
-    <p id="resultado">{{ resultado }}</p>
-    <p id="tiempo">{{ tiempo }}</p>
-  </div>
+  
+  @if(estadoComponente){
+    <div class="containertyping">
+      <!-- <div class="bg-[#1A1B1B] w-screen h-[60vh] text-white"> -->
+      <h1>Comparador de Texto</h1>
+      <p>Texto predefinido:</p>
+      <p id="textoPredefinido">{{ textoPredefinido }}</p>
+      <label for="textoUsuario">Ingresa el texto:</label>
+      <input
+        type="text"
+        id="textoUsuario"
+        [(ngModel)]="textoUsuario"
+        (keydown)="onKeyDown()"
+        (keyup)="onKeyUp()"
+        (paste)="preventAction($event)"
+        (copy)="preventAction($event)"
+      />
+      <p id="resultado">{{ resultado }}</p>
+      <p id="tiempo">{{ tiempo }}</p>
+    </div>
+  }@else{
+    <app-startgame [name]="name" [text]="text" (messageEvent)="receivingState($event)"></app-startgame>
+  }
+
 </section>

@@ -4,7 +4,7 @@
   max-width: 600px;  /* Mantiene un máximo si es necesario */
   background-color: white;  /* Fondo blanco para cada pantalla de contenido */
   padding: 20px;
-  margin: 20px auto;  /* Centrado horizontal y espaciado */
+  margin: 0 auto;  /* Centrado horizontal y espaciado */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);  /* Sombra para resaltar los contenedores */
   border-radius: 10px; /* Bordes redondeados para suavidad */
   text-align: center; /* Centra el texto y otros elementos */
@@ -12,7 +12,6 @@
 
 #gameContainer {
   text-align: center;
-  margin-top: 50px;
 }
 
 #box {
