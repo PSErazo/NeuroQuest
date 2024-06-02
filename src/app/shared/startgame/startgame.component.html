@@ -3,16 +3,25 @@
     <div class="text-center animation">
         <div class="centrado">
             <img [src]="icono" class="w-36">
-        </div>
-        <div >
-        <h1 class="text-6xl text-8xl text-[#519A73] font-normal text-center">{{name}}</h1>
-        <p class="text-[#519A73] text-2xl font-normal text-center my-3">{{text}}</p>
-        </div> 
+        </div>  
+   
+        
+        @if(pantallaInicial){
+          <h1 class="text-8xl text-[#519A73] font-normal text-center">{{name}}</h1>
+          <p class="text-[#519A73] text-2xl font-normal text-center my-3">{{text}}</p>
         <div class="text-center mt-6">
             <a class="px-7 py-2 bg-[#c65956] rounded font-bold my-5 cursor-pointer" (click)="cambiarEstado()">Start</a>
         </div>
-    </div>
-
-   
+        }@else{
+          <h1 class="text-2xl text-[#519A73] font-normal text-center">{{name}}</h1>
+            <p class="text-[#519A73] text-7xl font-semibold text-center my-3">{{levelScore}}</p>
+          <div class="mt-4 py-0.5 px-0.5">
+            <p class="text-[#519A73] text-xl font-normal text-center mb-9">save your score to see how you compare</p>
+            <a class="px-7 py-2 bg-[#c65956] rounded font-bold my-5 cursor-pointer mx-1.5">Save Score</a>
+            <a class="px-7 py-2 bg-[#FAA7A5] rounded font-bold my-5 cursor-pointer mx-1.5" (click)="cambiarEstado()">Try Again</a>
+          </div>
+          
+        }
     
+    </div>
 </div>

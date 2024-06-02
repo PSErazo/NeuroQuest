@@ -1,15 +1,15 @@
 @-o-keyframes fadeIt {
   0%   { background-color: #ffffff; }
-  50%  { background-color: #519A73; }
+
   100% { background-color: #FFFFFF; }
 }
 @keyframes fadeIt {
   0%   { background-color: #ffffff; }
-  50%  { background-color: #519A73; }
+ 
   100% { background-color: #FFFFFF; }
 }
 .fadeIn{
-    animation: fadeIt 0.8s ease-in-out;
+    animation: fadeIt 1s ease-in-out;
 }
 
 @-o-keyframes fadeItError {

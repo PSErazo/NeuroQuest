@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnChanges } from '@angular/core';
 import { TimerComponent } from '../../shared/timer/timer.component';
 import { StartgameComponent } from '../../shared/startgame/startgame.component';
 
@@ -11,20 +11,32 @@ import { StartgameComponent } from '../../shared/startgame/startgame.component';
   styleUrl: './aim-trainer.component.css',
 })
 
-export class AimTrainerComponent {
+export class AimTrainerComponent{
 
-  timerState: boolean = true;
+  timerStart: boolean = false;
+  timerStop : boolean = false;
+  timerScore: string = "";
   hits: number = 30;
   interval: any;
   name:string = "Aim Trainer";
   text:string = "Clickea los 30 objetivos en el menos tiempo posible";
   estadoComponente:boolean = false;
+  pantallaInicial = true;
+
   ngOnInit(): void {
  
   }
+  receivingTimer(timer:string):void{
+  
+      this.timerScore = timer
+  }
+
+
 
 
   startGame(){
+    this.timerStart = true;
+    this.timerStop = false
        this.createRandomCircle();
   }
 
@@ -59,25 +71,40 @@ export class AimTrainerComponent {
 
     this.createRandomCircle();
 
-    if (target.classList.contains('circle')) {
+    if(target.classList.contains('circle')){
       this.hits--;
     }
 
     hits!.innerHTML = this.hits.toString();
 
     if (this.hits === 0) {
-      this.stopTimer();
+      this.hits = 30
+     
+      this.pantallaInicial = false;
+      console.log(this.timerStart)
+      this.timerStop = true;
+      console.log(this.timerStop)
       let circle: HTMLElement | null = document.querySelector(".circle");
       circle!.style.display = "none"; 
       console.log("DETENIDO");
+      setTimeout(() => {
+         
+        this.mostrarScore()
+    
+     
+        }, 500);
+    
+      
     }
   }
+   mostrarScore(){
+    if(this.timerStop){
+       this.estadoComponente = false;
+    }
+   }
+ 
 
   
-
-  stopTimer(): void {
-    this.timerState = false;
-  }
   
   getRandomNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min) + min);
