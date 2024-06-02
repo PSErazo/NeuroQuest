@@ -7,4 +7,4 @@ import { Component } from '@angular/core';
   imports: [CommonModule],
   templateUrl: './login.component.html',
 })
-export class LoginComponent {}
+export default class LoginComponent {}

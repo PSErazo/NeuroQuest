@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import Swal from 'sweetalert2';
+import { Component } from '@angular/core';
 import { LevelComponent } from '../../shared/level/level.component';
 import { LifesComponent } from '../../shared/lifes/lifes.component';
 import { StartgameComponent } from '../../shared/startgame/startgame.component';
-import { query } from '@angular/animations';
 
 @Component({
   selector: 'sequence-game',
@@ -13,7 +11,7 @@ import { query } from '@angular/animations';
   templateUrl: './sequence.component.html',
   styleUrl: './sequence.component.css',
 })
-export class SequenceComponent implements OnInit {
+export class SequenceComponent {
   quadrates: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   estadoComponente: boolean = false;
   icono:string = "assets/sequence.svg";
@@ -27,7 +25,7 @@ export class SequenceComponent implements OnInit {
   levelScore:string = "";
   lifes:number = 3;
   ngOnInit(): void {
-    
+
   }
 
   receivingState(estate:boolean):void{
@@ -86,7 +84,7 @@ export class SequenceComponent implements OnInit {
     let i = 0;
     let habilitado = false;
     let x = setInterval(() => {
-      if (i === arrayNumber.length) {
+      if (i === arrayNumber.length ) {
         clearInterval(x);
         return;
       }
@@ -143,9 +141,9 @@ export class SequenceComponent implements OnInit {
 
       if (this.hearts < 1) {
 
-       
-        
-        
+
+
+
        this.restarGame();
       }
     }
