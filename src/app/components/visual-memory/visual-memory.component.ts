@@ -17,7 +17,7 @@ export class VisualMemoryComponent {
   //array de bloques pintados
   name: string = 'Visual Memory';
   text: string = 'Memoriza los bloques';
-
+  
   quadrates: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   numeroBloques: number = 9;
   //array de valores que se asignaran a cada bloque
@@ -27,9 +27,12 @@ export class VisualMemoryComponent {
   //tope de bloques elegibles
   bloqueselegibles: number = 3;
   //contador de niveles
+  pantallaInicial: boolean = true;
+  levelScore:string = "";
   level: number = 1;
   //etiquetas fijas
   lifes: number = 3;
+
   //contador de hearts
   heart: number = 3;
   contadoradicionbloques: number = 7;
@@ -40,11 +43,9 @@ export class VisualMemoryComponent {
   pintadosCorrectos: HTMLElement[] = [];
   pintadosErroneos: HTMLElement[] = [];
   estadoComponente: boolean = false;
+  icono:string = "";
 
-  startGame() {
-    this.generateRandom();
-    this.paintRandom();
-  }
+  
 
   receivingState(estate: boolean): void {
     if (estate) {
@@ -53,9 +54,14 @@ export class VisualMemoryComponent {
     }
   }
 
+  startGame(){
+    this.generateRandom();
+    this.paintRandom();
+  }
+
   //Generar los numeros(bloques) que se elegiran
   generateRandom() {
-    console.log(`se generaran los random ${this.bloqueselegibles}veces`);
+    
     for (let i = 0; this.numerosrandom.length < this.bloqueselegibles; i++) {
       //se generara un numero random del 1 al numero de bloques
       let numerorandom: number =
@@ -85,13 +91,15 @@ export class VisualMemoryComponent {
           const valorNumero = parseInt(valorBloque);
           if (this.numerosrandom.includes(valorNumero)) {
             bloque.classList.add(`bg-[#ffffff]`);
+            bloque.classList.add(`active`);
             setTimeout(() => {
               bloque.classList.remove(`bg-[#ffffff]`);
-            }, 800);
+              bloque.classList.remove(`active`);
+            }, 500);
           }
         }
       });
-    }, 500);
+    }, 600);
   }
 
   validate(quadrate: number, event: MouseEvent) {
@@ -99,32 +107,65 @@ export class VisualMemoryComponent {
 
     if (this.numerosrandom.includes(quadrate)) {
       target.classList.add(`bg-[#ffffff]`);
+      target.classList.add(`active`);
       this.aciertos++;
 
       this.pintadosCorrectos.push(target);
 
       if (this.bloqueselegibles === this.aciertos) {
+       
+        let section = document.querySelector(`section`);
+        section?.classList.remove(`bg-[#1A1B1B]`);
+        section?.classList.add(`bg-[#B6F9D5]`);
+        
         setTimeout(() => {
-          this.pintadosCorrectos.forEach((element) => {
-            element.classList.remove(`bg-[#ffffff]`);
-          });
-
-          this.pintadosErroneos.forEach((element) => {
-            element.classList.remove(`bg-[#214d35]`);
-          });
-          this.level++;
-          this.numerosrandom = [];
-          this.aciertos = 0;
-          if (this.level < 31) {
-            this.bloqueselegibles++;
+         
+          section?.classList.remove(`bg-[#B6F9D5]`);
+          section?.classList.add(`bg-[#1A1B1B]`);
+        
+          
+    
+         for (let i = 0; i < this.pintadosCorrectos.length; i++) {
+          const element = this.pintadosCorrectos[i];
+          element.classList.remove('bg-[#ffffff]');
+          element.classList.remove('active'); 
           }
-          this.pintadosCorrectos = [];
-          this.pintadosErroneos = [];
-          this.levelUp();
-        }, 500);
+
+
+         for (let i = 0; i < this.pintadosErroneos.length; i++) {
+          const element = this.pintadosErroneos[i];
+          element.classList.remove('bg-[#214d35]');
+          element.classList.remove(`shaking-block`);
+          }
+           
+      
+       
+          }, 500);
+       
+          setTimeout(() => {
+         
+            
+            this.level++;
+            this.numerosrandom = [];
+            this.aciertos = 0;
+            if (this.level < 31) {
+              this.bloqueselegibles++;
+            }
+            this.pintadosCorrectos = [];
+            this.pintadosErroneos = [];
+            this.errados = 0
+            this.levelUp();
+            
+             
+        
+         
+            }, 800);
+       
+          
       }
     } else {
       target.classList.add(`bg-[#214d35]`);
+     
       this.pintadosErroneos.push(target);
 
       this.errados++;
@@ -134,21 +175,24 @@ export class VisualMemoryComponent {
         setTimeout(() => {
           this.pintadosCorrectos.forEach((element) => {
             element.classList.remove(`bg-[#ffffff]`);
+            element.classList.remove(`active`);
           });
 
           this.pintadosErroneos.forEach((element) => {
             element.classList.remove(`bg-[#214d35]`);
+            element.classList.remove(`shaking-block`);
           });
 
-          this.heart--;
-          let life: HTMLElement = document.querySelectorAll('.fa-solid')[
-            this.heart
-          ] as HTMLElement;
-          life.style.color = '#000000';
+          
 
-          document.querySelector('.fa-heart');
+          this.heart--;
+          let life: HTMLElement = document.querySelectorAll('.fa-solid')[this.heart] as HTMLElement;
+          life.style.color = '#FAA7A5';
+
+         
 
           if (this.heart === 0) {
+            this.levelScore = `Level ${this.level}`
             this.level = 1;
             this.numerosrandom = [];
             this.aciertos = 0;
@@ -165,8 +209,10 @@ export class VisualMemoryComponent {
                 life.style.color = '#ffffff';
               }
             }, 500);
-
-            this.restartGame();
+            
+            
+          this.restartGame();
+            
             //si solo erras
           } else {
             this.numerosrandom = [];
@@ -180,6 +226,7 @@ export class VisualMemoryComponent {
       }
     }
   }
+
 
   levelUp() {
     //Si el nivel al que pasas es igual a 3 menor que 12
@@ -202,13 +249,22 @@ export class VisualMemoryComponent {
         this.generateRandom();
         //si es el nivel 6 o 9
       } else {
+        
+        
+
         this.quadrates = [];
         this.contadoradicionbloques += 2;
         this.numeroBloques += this.contadoradicionbloques;
         this.columns++;
         this.gap--;
         let container: HTMLElement = document.querySelector('.grid')!;
-
+        console.log(`este es el nivel${this.level}`)
+        if(this.level === 6){
+          container.classList.remove('w-80')
+          container.classList.remove('h-80')
+          container.classList.add('w-96')
+          container.classList.add('h-96')
+        }
         // se cambian aumentan las columnas mediante las clases
         container.classList.remove(`grid-cols-${this.columns - 1}`);
         container.classList.add(`grid-cols-${this.columns}`);
@@ -235,8 +291,7 @@ export class VisualMemoryComponent {
         container.classList.remove('grid-cols-3');
         container.classList.add(`grid-cols-${this.columns}`);
 
-        container.classList.remove(`gap-${this.gap + 1}`);
-        container.classList.add(`gap-${this.gap}`);
+   
 
         for (let i: number = 1; i <= this.numeroBloques; i++) {
           this.quadrates.push(i);
@@ -250,12 +305,14 @@ export class VisualMemoryComponent {
       }
     }
   }
-  restartGame() {
+  restartGame():void {
     let container: HTMLElement = document.querySelector('.grid')!;
     container.classList.remove(`grid-cols-${this.columns}`);
-    console.log('el gap al restablecer el juego es' + this.gap);
     container.classList.remove(`gap-${this.gap}`);
-
+    container.classList.remove('w-96')
+    container.classList.remove('h-96')
+    container.classList.add('w-80')
+    container.classList.add('h-80')
     this.columns = 3;
     this.bloqueselegibles = 3;
     this.numeroBloques = 9;
@@ -266,6 +323,8 @@ export class VisualMemoryComponent {
     container.classList.add(`grid-cols-${this.columns}`);
 
     container.classList.add(`gap-${this.gap}`);
-    this.generateRandom();
+    this.pantallaInicial = false;
+    this.estadoComponente = false;
+    
   }
 }

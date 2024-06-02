@@ -18,6 +18,7 @@ export class ReactionTimeComponent implements OnInit {
   estadoComponente: boolean = false;
   name:string = "Reaction Time";
   text:string="Cuando la pantalla cambie a verde, dale click en cualquier parte del cuadro"
+  icono:string = "assets/prueba.svg";
   constructor() {}
 
   ngOnInit() {
