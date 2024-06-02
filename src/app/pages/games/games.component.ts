@@ -15,36 +15,36 @@ interface games {
   imports: [CommonModule, RouterOutlet, ButtonComponent],
   templateUrl: './games.component.html',
 })
-export class GamesComponent {
+export default class GamesComponent {
   games: games[] = [
     {
       name: 'Sequence Memory',
-      router: '/game/sequencememory',
+      router: 'sequencememory',
       text: '¿Eres capaz de recordar el patron?',
     },
     {
       name: 'Visual Memory',
-      router: '/game/visualmemory',
+      router: 'visualmemory',
       text: 'Solo un cerebro como el mío puede memorizar tanto',
     },
     {
       name: 'Typing',
-      router: '/game/typing',
+      router: 'typing',
       text: '¿Eres rápido con los dedos? Demuestralo!',
     },
     {
       name: 'Aim Trainer',
-      router: '/game/aimtrainer',
+      router: 'aimtrainer',
       text: '¿Que tán preciso y rápido eres?',
     },
     {
       name: 'Number Memory',
-      router: '/game/numbermemory',
+      router: 'numbermemory',
       text: '¿Cuántas cifras puedes memorizar?',
     },
     {
       name: 'Reaction Time',
-      router: '/game/reactiontime',
+      router: 'reactiontime',
       text: 'Midamos tu velocidad de reacción',
     },
   ];

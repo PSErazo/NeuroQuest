@@ -1,6 +1,11 @@
 <div class="bg-[#1A1B1B]">
   <div class="flex justify-center items-center max-w-screen-2xl m-auto">
-    <form action="" class="px-8 pt-6 pb-8 min-w-3/12 max-w-xl">
+    <form
+      autocomplete="off"
+      [formGroup]="signup"
+      (ngSubmit)="onSave()"
+      class="px-8 pt-6 pb-8 min-w-3/12 max-w-xl"
+    >
       <div class="grid gap-6 mb-6 md:grid-cols-2">
         <div class="mb-4">
           <label for="email" class="text-[#519A73] block text-sm font-bold mb-2"
@@ -8,12 +13,16 @@
           </label>
           <input
             type="email"
-            name="email"
+            formControlName="email"
             id="email"
             placeholder="example@example.com"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-[#519A73] leading-tight focus:outline-none bg-[#1c2124] focus:shadow-outline"
           />
-          <!-- <span>Debe contener un formato correcto</span> -->
+          @if (isValidField('email')) {
+            <p class="text-[#c65956] text-xs">
+              {{ getFieldError("email") }}
+            </p>
+          }
         </div>
         <div class="mb-4">
           <label for="user" class="text-[#519A73] block text-sm font-bold mb-2"
@@ -21,11 +30,16 @@
           </label>
           <input
             type="text"
-            name="user"
+            formControlName="username"
             id="user"
             placeholder="Username"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-[#519A73] leading-tight focus:outline-none bg-[#1c2124] focus:shadow-outline"
           />
+          @if (isValidField('username')) {
+            <p class="text-[#c65956] text-xs">
+              {{ getFieldError("username") }}
+            </p>
+          }
         </div>
         <div class="mb-6">
           <label for="pass" class="text-[#519A73] block text-sm font-bold mb-2"
@@ -33,32 +47,41 @@
           </label>
           <input
             type="password"
-            name="pass"
+            formControlName="newPassword"
             id="pass"
             placeholder="*******"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-[#519A73] bg-[#1c2124] mb-3 leading-tight focus:outline-none focus:shadow-outline"
           />
-          <!-- <span>El password debe contener un caracter especial</span>
-          <span>El password debe contener minimo 8 caracteres</span> -->
+          @if (isValidField('newPassword')) {
+            <p class="text-[#c65956] text-xs">
+              {{ getFieldError("newPassword") }}
+            </p>
+          }
         </div>
         <div class="mb-6">
-          <label for="pass" class="text-[#519A73] block text-sm font-bold mb-2"
+          <label
+            for="password"
+            class="text-[#519A73] block text-sm font-bold mb-2"
             >Password confirmation:
           </label>
           <input
             type="password"
-            name="pass"
-            id="pass"
+            formControlName="confirmPass"
+            id="confirmPass"
             placeholder="*******"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-[#519A73] bg-[#1c2124] mb-3 leading-tight focus:outline-none focus:shadow-outline"
           />
-          <!-- <span>Las contraseñas no coinciden</span> -->
+          @if (isValidField('confirmPass')) {
+            <p class="text-[#c65956] text-xs">
+              {{ getFieldError("confirmPass") }}
+            </p>
+          }
         </div>
       </div>
       <button
         class="bg-[#519A73] hover:text-[#519A73] hover:bg-[#1c2124] text-[#1c2124] font-bold py-2 px-7 rounded focus:outline-none focus:shadow-outline"
       >
-        Login
+        Sign Up
       </button>
     </form>
   </div>
