@@ -14,6 +14,7 @@ export const routes: Routes = [
   {
     path: '',
     component: GamesComponent,
+    
   },
   {
     path: 'game',

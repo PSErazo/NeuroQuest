@@ -9,7 +9,7 @@
     <ul class="grid grid-cols-3 gap-4 size-auto w-80 h-80">
       <li
         *ngFor="let quadrate of quadrates"
-        class="bloque bg-[#519A73] rounded-lg drop-shadow-lg cursor-pointer"
+        class="bloque bg-[#519A73] rounded-md drop-shadow-lg cursor-pointer"
         (click)="validate(quadrate, $event)"
       >
         <span class="hidden">{{ quadrate }}</span>
@@ -20,6 +20,8 @@
   <app-startgame
     [name]="name"
     [text]="text"
+    [levelScore]="levelScore"
+    [pantallaInicial]="pantallaInicial"
     (messageEvent)="receivingState($event)"
   ></app-startgame>
   }

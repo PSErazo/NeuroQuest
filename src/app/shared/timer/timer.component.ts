@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges,Output,EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-timer',
@@ -10,29 +10,47 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 })
 export class TimerComponent implements OnChanges {
 
-  @Input() public timerState: boolean = false;
-
-  totalTime = 0;
+  @Input() public timerStart: boolean = false;
+  @Input() public timerStop: boolean = false;
+  @Output() timerEvent = new EventEmitter<string>();
+  
+  mandarScore(){
+    this.timerEvent.emit(this.tiempoScore);
+  }
+  totalTime = 0;      
   interval: any;
+  tiempoScore: string = "";
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['timerState']) {
-      if (this.timerState) {
+    if (changes['timerStart']) {
+      if (this.timerStart){
+        console.log(`SE CAMBIO A TRUE`)
         this.startTimer();
-      } else {
+      }
+    }
+    if(changes['timerStop']){
+      if (this.timerStop){
+        console.log(`SE CAMBIO A FALSE`)
         this.stopTimer();
       }
     }
   }
+ 
 
   startTimer(): void {
     this.interval = window.setInterval(this.increaseTime.bind(this), 1000);
   }
 
   stopTimer(): void {
+   console.log(`${this.tiempoScore}`)
+   this.mandarScore()
     clearInterval(this.interval);
-    console.log("Temporizador detenido");
+    this.totalTime = 0;
+    this.setTime("00:00")
+  
+  
   }
+  
 
   increaseTime(): void {
     
@@ -46,10 +64,12 @@ export class TimerComponent implements OnChanges {
     const formattedSeconds = seconds < 10 ? '0' + seconds : seconds.toString();
 
     this.setTime(`${formattedMinutes}:${formattedSeconds}`);
+    
   }
 
   setTime(time: string): void {
     let timer: HTMLElement | null = document.querySelector(".timer");
     timer!.innerHTML = "TIEMPO: " + time;
+    this.tiempoScore = `TIEMPO ${time}`;
   }
 }

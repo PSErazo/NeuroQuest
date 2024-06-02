@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { LevelComponent } from '../../shared/level/level.component';
 import { LifesComponent } from '../../shared/lifes/lifes.component';
 import { StartgameComponent } from '../../shared/startgame/startgame.component';
+import { query } from '@angular/animations';
 
 @Component({
   selector: 'sequence-game',
@@ -22,17 +23,40 @@ export class SequenceComponent implements OnInit {
   level: number = 0;
   id: number = 0;
   hearts:number = 3
-
+  pantallaInicial: boolean = true;
+  levelScore:string = "";
+  lifes:number = 3;
   ngOnInit(): void {
+    
+  }
+
+  receivingState(estate:boolean):void{
+    if(estate){
+      this.estadoComponente = estate;
+      this.startGame();
+    }
+  }
+
+
+  startGame(){
     this.levelUp();
   }
 
   restarGame() {
+    this.levelScore = `Level ${this.level}`
     this.level = 0;
     this.id = 0;
     this.randomCorrect = [];
     this.hearts = 3
-    this.levelUp();
+    for (let i = 0; i < this.hearts; i++) {
+      let life: HTMLElement = document.querySelectorAll('.fa-solid')[
+        i
+      ] as HTMLElement;
+      life.style.color = '#ffffff';
+    }
+    this.estadoComponente = false;
+    this.pantallaInicial = false
+   // this.levelUp();
   }
 
   levelUp() {
@@ -79,7 +103,7 @@ export class SequenceComponent implements OnInit {
           this.habilitar(arrayNumber[i] - 1, 'fadeIn');
         }
       }
-    }, 500);
+    }, 300);
   }
 
   habilitar(card: number, style: string) {
@@ -113,20 +137,21 @@ export class SequenceComponent implements OnInit {
       }, 300);
       console.log('error');
       this.hearts--;
+      console.log(`vidas actuales:${this.hearts}`)
+      let life: HTMLElement = document.querySelectorAll('.fa-solid')[this.hearts] as HTMLElement;
+      life.style.color = '#FAA7A5'
+
       if (this.hearts < 1) {
-        Swal.fire({
-          title: 'GAME OVER',
-          confirmButtonText: 'Reset Game',
-        }).then(() => {
-          this.restarGame();
-        });
+
+       
+        
+        
+       this.restarGame();
       }
     }
     console.log('validateClick', quadrate);
   }
 
-  receivingState(estate:boolean):void{
-    this.estadoComponente = estate;
-  }
+
 
 }
