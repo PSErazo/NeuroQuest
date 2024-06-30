@@ -20,8 +20,7 @@ export class TypingComponent implements OnInit {
   name:string = "Typing";
   text:string = "Cuantas palabras por minuto puedes tipear?"
   estadoComponente:boolean = false;
- 
-
+  
   startGame(){
     this.textoPredefinido = this.generarTextoAleatorio(
       this.generarNumeroAleatorio()
