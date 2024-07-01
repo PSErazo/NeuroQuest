@@ -1,17 +1,13 @@
-<section class="bg-[#1A1B1B] w-screen h-[60vh]" id="gameContainer">
+<section class="bg-[#1A1B1B] w-screen h-[60vh] flex justify-center items-center" id="gameContainer">
   
   @if(estadoComponente){
-    <div class="content">
-      <h1>Test de Tiempo de Reacción</h1>
-      <div id="box" class="red"><span id="boxText">Espera el verde...</span></div>
-      <button class="bg-[#519A73] px-3 py-2 rounded-lg" (click)="resetGame()">
-        Empezar de nuevo
-      </button>
-      <!-- Usar (click) en lugar de onclick -->
-      <p id="result"></p>
+    <div class="screen-1">
+      <h1>¡Da click cuando la pantalla sea color verde!</h1>
     </div>
+    <app-timer [microSecOn]="microSecOn" [microSecOff]="microSecOff" class="timer" (timerEvent)="receivingTimer($event)" style="display: none"></app-timer>
+    <div class="screen-2" style="display: none" (click)="stopTimeClick($event)"><h1>Click!</h1></div>
   }@else{
-    <app-startgame [name]="name" [text]="text" [icono]="icono" (messageEvent)="receivingState($event)"></app-startgame>
+    <app-startgame [name]="name" [text]="text" [levelScore] = "timerScore" (messageEvent)="receivingState($event)"></app-startgame>
   }
 
 </section>

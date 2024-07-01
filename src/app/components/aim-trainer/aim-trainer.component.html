@@ -3,8 +3,7 @@
   <div class="stats">
     <app-timer [timerStart]="timerStart" [timerStop]="timerStop" class="timer" (timerEvent)="receivingTimer($event)"></app-timer>
     <div class="hits-area">
-      <div>FALTANTES:&nbsp;</div>
-      <div class="hits"></div>
+      <div class="hits">FALTANTES: {{hits}}</div>
     </div>
   </div>
   <div class="container-circles">

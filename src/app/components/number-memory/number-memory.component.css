@@ -1,66 +1,63 @@
 
 .content {
   width: 90%;  /* Ajusta esto al ancho deseado */
+  height: 35%;
   max-width: 600px;  /* Mantiene un máximo si es necesario */
-  background-color: white;  /* Fondo blanco para cada pantalla de contenido */
   padding: 20px;
-  margin: 20px auto;  /* Centrado horizontal y espaciado */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);  /* Sombra para resaltar los contenedores */
-  border-radius: 10px; /* Bordes redondeados para suavidad */
-  text-align: center; /* Centra el texto y otros elementos */
+  margin: 20px auto;
+  text-align: center;
 }
 
-/* Estilos específicos para la pantalla de visualización de números */
-#number-screen h1 {
-  font-size: 4em; /* Tamaño grande para el número a recordar */
-  color: #333; /* Color oscuro para mejor visibilidad */
-  margin-bottom: 20px; /* Espacio después del número */
+/* Primera pantalla */
+
+.number-main {
+  font-size: 4em;
+  color: #519A73;
+  margin-bottom: 20px;
 }
 
-/* Barra de progreso personalizada */
-.progress {
-  width: 80%; /* Controla el ancho de la barra de progreso */
-  background-color: #e0e0e0; /* Fondo gris para la barra de progreso */
-  border-radius: 5px; /* Bordes redondeados para la barra */
-  overflow: hidden; /* Asegura que la barra interna no sobresalga */
-  margin: 20px auto; /* Centrado horizontal */
+.timerLine {
+  border: solid 1px;
+  width: 100px;
+  border-color: #519A73;
+  border-radius: 50%;
+  margin: 0 auto;
+  transition: width 2s linear;
 }
 
-.progress-bar {
-  background-color: #007bff; /* Color azul para la barra activa */
-  height: 15px; /* Altura de la barra de progreso */
-  transition: width 1s linear; /* Transición suave del ancho de la barra */
+/* Segunda pantalla */
+
+.lblQuestion {
+  color: #519A73;
+  font-size: 20px;
+  margin-bottom: 20px;
 }
 
-/* Estilos para los inputs y botones */
-input[type="text"], button {
-  width: 70%;
-  padding: 12px;
-  margin: 10px 0; /* Espaciado vertical */
-  border-radius: 5px; /* Bordes redondeados */
-  border: 1px solid #ccc; /* Borde sutil */
-  display: block; /* Asegura que los elementos se coloquen uno debajo del otro */
-  margin-left: auto; /* Centrado horizontal */
-  margin-right: auto; /* Centrado horizontal */
+#answer-input {
+  width: 400px; /* Ancho deseado */
+  height: 40px; /* Alto deseado */
+  padding: 10px; /* Espacio entre el texto y el borde */
+  border: 1px solid #519A73; /* Borde con color gris claro */
+  background-color: white; /* Fondo blanco */
+  color: black; /* Color del texto */
+  text-align: center; /* Texto centrado */
+  font-size: 16px; /* Tamaño de la fuente */
 }
 
-button {
-  background-color: #28a745; /* Verde, para botones de acción */
-  color: white; /* Texto en blanco para contrastar con el fondo */
-  cursor: pointer; /* Cursor de mano para indicar que es clickeable */
+#submit-button {
+  width: 100px;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #519A73;
+  border-radius: 5%;
+  background-color: none;
+  color: #519A73;
+  text-align: center;
+  font-size: 16px;
+  transition: 0.2s;
 }
 
-button:hover {
-  background-color: #218838; /* Un tono más oscuro de verde para el hover */
+#submit-button:hover {
+  background-color: #519A73;
+  color: black;
 }
-
-/* Adiciona estilos para manejar la visualización de la respuesta y nivel */
-#result-screen h2 {
-  margin: 15px 0; /* Espaciado entre los elementos del título */
-}
-
-/* Si necesitas estilos específicos para '¿Cuál es el Número?' y las respuestas */
-#input-screen h2, #result-screen h2 {
-  color: #333; /* Color oscuro para los títulos de las pantallas */
-}
-
