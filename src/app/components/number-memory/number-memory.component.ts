@@ -64,6 +64,8 @@ export class NumberMemoryComponent {
       let screen2: HTMLElement | null = document.querySelector(`.screen-2`);
       screen2!.style.display = "block";
       
+      let numberAns: HTMLElement | null = document.querySelector(`.number-main`);
+      numberAns!.innerText = "Sapo???";
     }, 2000);
   }
 
