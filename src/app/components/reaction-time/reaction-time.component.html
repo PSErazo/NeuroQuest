@@ -7,7 +7,7 @@
     <app-timer [microSecOn]="microSecOn" [microSecOff]="microSecOff" class="timer" (timerEvent)="receivingTimer($event)" style="display: none"></app-timer>
     <div class="screen-2" style="display: none" (click)="stopTimeClick($event)"><h1>Click!</h1></div>
   }@else{
-    <app-startgame [name]="name" [text]="text" [levelScore] = "timerScore" (messageEvent)="receivingState($event)"></app-startgame>
+    <app-startgame [pantallaInicial]="pantallaInicial" [name]="name" [text]="text" [levelScore] = "timerScore" (messageEvent)="receivingState($event)"></app-startgame>
   }
 
 </section>

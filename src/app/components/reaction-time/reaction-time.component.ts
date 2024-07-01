@@ -11,7 +11,7 @@ import { TimerComponent } from '../../shared/timer/timer.component';
   styleUrl: './reaction-time.component.css',
 })
 export class ReactionTimeComponent implements OnInit {
-
+  pantallaInicial = true;
   timeValueChange: number = 0;
   microSecOn: boolean = false;
   microSecOff : boolean = false;
@@ -65,8 +65,8 @@ export class ReactionTimeComponent implements OnInit {
     this.microSecOff = true;
     setTimeout(() => {
       this.mostrarScore()
+      this.pantallaInicial = false;
       }, 1);
-    
   }
 
   mostrarScore(){
