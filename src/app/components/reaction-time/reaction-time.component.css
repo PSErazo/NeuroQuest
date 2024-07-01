@@ -1,38 +1,20 @@
-
-.content {
-  width: 90%;  /* Ajusta esto al ancho deseado */
-  max-width: 600px;  /* Mantiene un máximo si es necesario */
-  background-color: white;  /* Fondo blanco para cada pantalla de contenido */
-  padding: 20px;
-  margin: 0 auto;  /* Centrado horizontal y espaciado */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);  /* Sombra para resaltar los contenedores */
-  border-radius: 10px; /* Bordes redondeados para suavidad */
-  text-align: center; /* Centra el texto y otros elementos */
+.screen-1 h1 {
+  font-size: 3em;
+  color: #519A73;
 }
 
-#gameContainer {
-  text-align: center;
+.screen-2 {
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  background-color: #519A73;
+  flex-direction: column;
 }
 
-#box {
-  width: 200px;
-  height: 200px;
-  margin: 0 auto;
+.screen-2 h1 {
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-#resetButton {
-  margin-top: 35px; /* Añadir margen superior para separar el botón del cuadro */
-}
-
-.red {
-  background-color: red;
-}
-
-.green {
-  background-color: green;
+  font-size: 4em;
 }

@@ -1,30 +1,18 @@
-<section
-  class="bg-[#1A1B1B] w-screen h-[60vh] flex justify-center items-center"
->
+<section class="bg-[#1A1B1B] w-screen h-[60vh] flex justify-center items-center">
 
   @if(estadoComponente){
-    <div class="content" id="start-screen" style="display: none"> 
-      <h2>Memoria Numérica</h2>
-      <p>Yo recuerdo hasta 7 cifras, ¿cuántos puedes recordar tú?</p>
-      <button id="start-button">Empezar</button>
+    <div class="content screen-1">
+      <h1 class="number-main"></h1>
+      <div class="timerLine"></div>
     </div>
-    <div class="content" id="number-screen" style="display: block">
-      <h1 id="number-display"></h1>
-    </div>
-    <div class="content" id="input-screen" style="display: none">
-      <h2>¿Cuál es el Número?</h2>
-      <input type="text" id="user-input" placeholder="Escribe el número..." />
-      <button id="submit-button">OK</button>
-    </div>
-    <div class="content" id="result-screen" style="display: none">
-      <h2>Número: <span id="correct-number"></span></h2>
-      <h2>Tu Respuesta: <span id="user-answer"></span></h2>
-      <h2>Nivel: <span id="current-level"></span></h2>
-      <button id="next-level-button" style="display: none">Siguiente</button>
-      <button id="try-again-button">Volver a Intentar</button>
+    <div class="content screen-2" style="display: none">
+      <h2 class="lblQuestion">¿Cuál es el Número?</h2>
+      <input type="text" id="answer-input" placeholder="Escribe el número..." autocomplete="off"/>
+      <br><br>
+      <button id="submit-button" (click)="validateNumber($event)">Confirmar</button>
     </div>
   }@else{
-    <app-startgame [name]="name" [text]="text" (messageEvent)="receivingState($event)"></app-startgame>
+    <app-startgame [pantallaInicial]= "pantallaInicial" [name]="name" [text]="text" [levelScore] = "levelScore" (messageEvent)="receivingState($event)"></app-startgame>
   }
 
 </section>
