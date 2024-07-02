@@ -6,6 +6,7 @@ interface games {
   name: string;
   router: string;
   text:string;
+  icono:string;
 }
 
 @Component({
