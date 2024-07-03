@@ -11,17 +11,14 @@ body {
   max-width: 600px;
   margin: 0px auto;
   padding: 20px;
-  /*background-color: #fff;*/
   background-color: #519A73;
-  /*background-color: rgb(26, 27, 27);*/
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   text-align: center;
-  color: #fff;
-  /*color: #519A73;*/
+  color: #519A73;
   font-size: 32px;
   font-weight: bold;
 }
@@ -53,7 +50,6 @@ button:hover {
 }
 
 p#resultado {
-  /*margin-top: 20px;*/
   font-weight: bold;
 }
 
@@ -67,4 +63,12 @@ p#resultado {
 
 .texto_blanco {
   color: white;
+}
+
+.texto_verde {
+  color: #519A73;
+}
+
+.grande {
+  font-size: 30px;
 }

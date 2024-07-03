@@ -17,8 +17,9 @@ export class TypingComponent implements OnInit {
   tiempo: string = '';
   startTime!: number;
   endTime!: number;
-  name:string = "Typing";
-  text:string = "Cuantas palabras por minuto puedes tipear?"
+  pantallaInicial: boolean = true;
+  name:string = "Typing Challenge";
+  text:string = "Cuantas palabras por segundo puedes tipear?"
   estadoComponente:boolean = false;
   
   startGame(){
@@ -90,6 +91,8 @@ export class TypingComponent implements OnInit {
 
     document.getElementById('textoPredefinido')!.innerHTML = resultadoHtml;
 
+    this.actualizarContadorPalabras(textoUsuario);
+
     if (textoUsuario.length >= this.textoPredefinido.length) {
       this.endTime = new Date().getTime();
       let tiempoTranscurrido = (this.endTime - this.startTime) / 1000;
@@ -115,8 +118,30 @@ export class TypingComponent implements OnInit {
       if (campoTexto) {
         campoTexto.disabled = true;
       }
+      
+      // Actualizar el mensaje de logro
+      const palabras = this.contarPalabras(textoUsuario);
+      const logroElemento = document.getElementById('logro');
+      if (logroElemento) {
+        logroElemento.innerText = `LOGRADO!!! Has escrito ${palabras} palabras en ${tiempoTranscurrido.toFixed(2)} segundos`;
+      }
 
     }
+  }
+
+  actualizarContadorPalabras(texto: string) {
+    const palabras = this.contarPalabras(texto);
+    console.log(`Palabras: ${palabras}`);  // Agregado para depuración
+    const contadorPalabrasElemento = document.getElementById('contadorPalabras');
+    if (contadorPalabrasElemento) {
+      contadorPalabrasElemento.innerText = `Palabras: ${palabras}`;
+    } else {
+      console.error('Elemento contadorPalabras no encontrado');  // Agregado para depuración
+    }
+  }
+
+  contarPalabras(texto: string): number {
+    return texto.trim().split(/\s+/).filter(word => word.length > 0).length;
   }
 
   preventAction(event: ClipboardEvent) {
