@@ -1,6 +1,9 @@
 <div class="bg-[#1A1B1B]">
   <div class="flex justify-center items-center max-w-screen-2xl m-auto">
-    <form action="" class="px-8 pt-6 pb-8 mb-4 w-3/12">
+    <form autocomplete="off"
+      [formGroup]="login"
+      (ngSubmit)="onLogin(login.value)"
+      class="px-8 pt-6 pb-8 mb-4 w-3/12">
       <div class="flex justify-center flex-col">
         <div class="mb-4">
           <label for="user" class="text-[#519A73] block text-sm font-bold mb-2"
@@ -8,8 +11,8 @@
           </label>
           <input
             type="text"
-            name="user"
-            id="user"
+            name="email"
+            id="email"
             placeholder="Username"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-[#519A73] leading-tight focus:outline-none bg-[#1c2124] focus:shadow-outline"
           />
@@ -20,8 +23,8 @@
           </label>
           <input
             type="password"
-            name="pass"
-            id="pass"
+            name="password"
+            id="password"
             placeholder="*******"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-[#519A73] bg-[#1c2124] mb-3 leading-tight focus:outline-none focus:shadow-outline"
           />

@@ -8,4 +8,9 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule],
   templateUrl: './nav.component.html',
 })
-export class NavComponent {}
+export class NavComponent {
+
+  login:boolean = false;
+  @Input()
+  name:string = '';
+}

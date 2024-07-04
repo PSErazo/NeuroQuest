@@ -15,9 +15,10 @@ export class StartgameComponent {
   @Input() public levelScore: any =  0;
   @Input() public pantallaInicial: boolean = false;
   @Output() messageEvent = new EventEmitter<boolean>();
-  
+
   cambiarEstado(){
     this.messageEvent.emit(true)
   }
+
 
 }
