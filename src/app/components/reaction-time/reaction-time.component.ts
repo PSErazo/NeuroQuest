@@ -1,78 +1,77 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { StartgameComponent } from '../../shared/startgame/startgame.component';
+import { TimerComponent } from '../../shared/timer/timer.component';
 
 @Component({
   selector: 'app-reaction-time',
   standalone: true,
-  imports: [StartgameComponent],
+  imports: [StartgameComponent, TimerComponent, CommonModule],
   templateUrl: './reaction-time.component.html',
   styleUrl: './reaction-time.component.css',
 })
 export class ReactionTimeComponent implements OnInit {
-  box: HTMLElement | null = null;
-  result: HTMLElement | null = null;
-  boxText: HTMLElement | null = null;
-  startTime: number = 0; // Inicializar con un valor predeterminado
-  endTime: number = 0; // Inicializar con un valor predeterminado
+  pantallaInicial = true;
+  timeValueChange: number = 0;
+  microSecOn: boolean = false;
+  microSecOff : boolean = false;
+  interval: any;
+  timerScore: string = "";
   estadoComponente: boolean = false;
   name:string = "Reaction Time";
   text:string="Cuando la pantalla cambie a verde, dale click en cualquier parte del cuadro"
-  icono:string = "assets/prueba.svg";
+  icono:string = "assets/reactionbutton.svg";
   constructor() {}
 
   ngOnInit() {
    
   }
 
-  initGame(){
-    this.startGame();
+  receivingTimer(timer:string):void{
+    this.timerScore = timer
+}
+
+  startGame() {
+    this.microSecOn = false
+    this.microSecOff = false
+    this.nextScreenClick();
   }
 
   receivingState(estate:boolean):void{
     if (estate) {
       this.estadoComponente = estate
-      this.initGame();
+      this.startGame();
     }
   }
   
-
-  startGame() {
-    this.box = document.getElementById('box') as HTMLElement;
-    this.result = document.getElementById('result') as HTMLElement;
-    this.boxText = document.getElementById('boxText') as HTMLElement;
-
-    if (this.box) {
-      this.box.addEventListener('click', () => {
-        if (this.box && this.box.style.backgroundColor === 'green') {
-          this.endTime = new Date().getTime();
-          let reactionTime = this.endTime - this.startTime;
-          if (this.result && this.boxText) {
-            this.result.textContent = `Tu tiempo de reacción es: ${reactionTime} ms`;
-            this.box.style.backgroundColor = 'red';
-            this.boxText.textContent = 'Espera el verde...';
-            this.result.textContent +=
-              ' Haz clic en "Empezar de nuevo" para reiniciar.';
-          }
-        }
-      });
-    }
-
-    this.resetGame();
+  timeForChange() {
+    const minNumber = 2;
+    const maxNumber = 5;
+    this.timeValueChange = (Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber) * 1000;
   }
 
-  resetGame() {
-    if (this.box && this.boxText && this.result) {
-      this.box.style.backgroundColor = 'red';
-      this.boxText.textContent = 'Espera el verde...';
-      this.result.textContent = '';
-      setTimeout(() => {
-        if (this.box && this.boxText) {
-          this.box.style.backgroundColor = 'green';
-          this.boxText.textContent = '¡Haz clic ahora!';
-          this.startTime = new Date().getTime();
-        }
-      }, Math.random() * 2000 + 1000); // Entre 1 y 3 segundos aleatoriamente
-    }
+  nextScreenClick(): void{
+    this.timeForChange();
+    setTimeout(() => {
+      let screen1: HTMLElement | null = document.querySelector(`.screen-1`);
+      screen1!.style.display = "none";
+      let screen2: HTMLElement | null = document.querySelector(`.screen-2`);
+      screen2!.style.display = "flex";
+      this.microSecOn = true;
+    }, this.timeValueChange);
   }
+
+  stopTimeClick(event: MouseEvent){
+    this.microSecOff = true;
+    setTimeout(() => {
+      this.mostrarScore()
+      this.pantallaInicial = false;
+      }, 1);
+  }
+
+  mostrarScore(){
+    if(this.microSecOff){
+       this.estadoComponente = false;
+    }
+   }
 }

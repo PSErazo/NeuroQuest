@@ -26,13 +26,11 @@ export class AimTrainerComponent{
   ngOnInit(): void {
  
   }
+  
   receivingTimer(timer:string):void{
   
       this.timerScore = timer
   }
-
-
-
 
   startGame(){
     this.timerStart = true;
@@ -75,7 +73,7 @@ export class AimTrainerComponent{
       this.hits--;
     }
 
-    hits!.innerHTML = this.hits.toString();
+    hits!.innerHTML = "FALTANTES: " + this.hits.toString();
 
     if (this.hits === 0) {
       this.hits = 30
@@ -103,9 +101,6 @@ export class AimTrainerComponent{
     }
    }
  
-
-  
-  
   getRandomNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min) + min);
   }

@@ -14,7 +14,6 @@ import { StartgameComponent } from '../../shared/startgame/startgame.component';
 export class SequenceComponent {
   quadrates: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   estadoComponente: boolean = false;
-  icono:string = "assets/sequence.svg";
   randomCorrect: number[] = [];
   name:string = "Sequence Memory";
   text:string = "Memoriza la secuencia";
