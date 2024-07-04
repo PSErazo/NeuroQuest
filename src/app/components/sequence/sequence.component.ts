@@ -53,7 +53,6 @@ export class SequenceComponent {
     }
     this.estadoComponente = false;
     this.pantallaInicial = false
-   // this.levelUp();
   }
 
   levelUp() {

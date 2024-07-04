@@ -17,7 +17,7 @@ export class VisualMemoryComponent {
   //array de bloques pintados
   name: string = 'Visual Memory';
   text: string = 'Memoriza los bloques';
-  
+
   quadrates: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   numeroBloques: number = 9;
   //array de valores que se asignaran a cada bloque
@@ -44,8 +44,8 @@ export class VisualMemoryComponent {
   pintadosErroneos: HTMLElement[] = [];
   estadoComponente: boolean = false;
   icono:string = "";
-  selectQuadrate: number[] = []; 
-  
+  selectQuadrate: number[] = [];
+
 
   receivingState(estate: boolean): void {
     if (estate) {
@@ -61,7 +61,7 @@ export class VisualMemoryComponent {
 
   //Generar los numeros(bloques) que se elegiran
   generateRandom() {
-    
+
     for (let i = 0; this.numerosrandom.length < this.bloqueselegibles; i++) {
       //se generara un numero random del 1 al numero de bloques
       let numerorandom: number =
@@ -105,7 +105,7 @@ export class VisualMemoryComponent {
   // validate(quadrate: number, event: MouseEvent) {
   //   const target: HTMLElement = event.target as HTMLElement;
 
-    
+
 
 
   //   if (this.numerosrandom.includes(quadrate)) {
@@ -113,41 +113,41 @@ export class VisualMemoryComponent {
   //     target.classList.add(`active`);
 
   //   //  this.selectQuadrate.push(quadrate)
-     
-      
+
+
   //    // const count = this.selectQuadrate.filter(num => num === quadrate).length;
   //   //    if(count < 2){
   //         this.aciertos++;
   //         this.pintadosCorrectos.push(target);
   //   //    }
-      
 
-     
-      
-     
-        
 
-   
 
-   
+
+
+
+
+
+
+
 
   //     if (this.bloqueselegibles === this.aciertos) {
-       
+
   //       let section = document.querySelector(`section`);
   //       section?.classList.remove(`bg-[#1A1B1B]`);
   //       section?.classList.add(`bg-[#B6F9D5]`);
-        
+
   //       setTimeout(() => {
-         
+
   //         section?.classList.remove(`bg-[#B6F9D5]`);
   //         section?.classList.add(`bg-[#1A1B1B]`);
-        
-          
-    
+
+
+
   //        for (let i = 0; i < this.pintadosCorrectos.length; i++) {
   //         const element = this.pintadosCorrectos[i];
   //         element.classList.remove('bg-[#ffffff]');
-  //         element.classList.remove('active'); 
+  //         element.classList.remove('active');
   //         }
 
 
@@ -156,14 +156,14 @@ export class VisualMemoryComponent {
   //         element.classList.remove('bg-[#214d35]');
   //         element.classList.remove(`shaking-block`);
   //         }
-           
-      
-       
+
+
+
   //         }, 500);
-       
+
   //         setTimeout(() => {
-         
-            
+
+
   //           this.level++;
   //           this.numerosrandom = [];
   //           this.aciertos = 0;
@@ -174,17 +174,17 @@ export class VisualMemoryComponent {
   //           this.pintadosErroneos = [];
   //           this.errados = 0
   //           this.levelUp();
-            
-             
-        
-         
+
+
+
+
   //           }, 800);
-       
-          
+
+
   //     }
   //   } else {
   //     target.classList.add(`bg-[#214d35]`);
-     
+
   //     this.pintadosErroneos.push(target);
 
   //     this.errados++;
@@ -203,13 +203,13 @@ export class VisualMemoryComponent {
   //           element.classList.remove(`shaking-block`);
   //         });
 
-          
+
 
   //         this.heart--;
   //         let life: HTMLElement = document.querySelectorAll('.fa-solid')[this.heart] as HTMLElement;
   //         life.style.color = '#FAA7A5';
 
-         
+
 
   //         if (this.heart === 0) {
   //      //    this.selectQuadrate = []
@@ -230,10 +230,10 @@ export class VisualMemoryComponent {
   //               life.style.color = '#ffffff';
   //             }
   //           }, 500);
-            
-            
+
+
   //         this.restartGame();
-            
+
   //           //si solo erras
   //         } else {
   //           this.numerosrandom = [];
@@ -247,11 +247,11 @@ export class VisualMemoryComponent {
   //     }
   //   }
   // }
-  
+
   validate(quadrate: number, event: MouseEvent) {
     const target: HTMLElement = event.target as HTMLElement;
     if (this.numerosrandom.length < 1) return
-    
+
     if (this.numerosrandom.includes(quadrate)) {
       target.classList.add(`bg-[#ffffff]`);
       target.classList.add(`active`);
@@ -269,9 +269,9 @@ export class VisualMemoryComponent {
         setTimeout(() => {
           section?.classList.remove(`rectangulo`);
         }, 900);
-       
-        
-       
+
+
+
 
         setTimeout(() => {
 
@@ -320,23 +320,23 @@ export class VisualMemoryComponent {
 
       }
     } else {
-     
+
       if (this.selectQuadrate.includes(quadrate)) return;
       target.classList.add(`bg-[#214d35]`);
-      
-      this.pintadosErroneos.push(target);
 
+      this.pintadosErroneos.push(target);
+      this.selectQuadrate.push(quadrate);
       this.errados++;
       this.selectQuadrate.push(quadrate);
       //Si llegas a tres errados por nivel
       if (this.errados === 3) {
-        
+
         let section = document.querySelector(`section`);
         section?.classList.add(`rectangulo-erroneo`);
         setTimeout(() => {
           section?.classList.remove(`rectangulo-erroneo`);
         }, 900);
-       
+
 
 
         this.selectQuadrate = [];
@@ -394,7 +394,7 @@ export class VisualMemoryComponent {
       }
     }
   }
-  
+
   levelUp() {
     //Si el nivel al que pasas es igual a 3 menor que 12
     if (this.level % 3 === 0 && this.level < 12) {
@@ -417,8 +417,8 @@ export class VisualMemoryComponent {
         this.generateRandom();
         //si es el nivel 6 o 9
       } else {
-        
-        
+
+
      //   this.selectQuadrate = []
         this.quadrates = [];
         this.contadoradicionbloques += 2;
@@ -460,7 +460,7 @@ export class VisualMemoryComponent {
         container.classList.remove('grid-cols-3');
         container.classList.add(`grid-cols-${this.columns}`);
 
-   
+
 
         for (let i: number = 1; i <= this.numeroBloques; i++) {
           this.quadrates.push(i);
@@ -496,6 +496,6 @@ export class VisualMemoryComponent {
     container.classList.add(`gap-${this.gap}`);
     this.pantallaInicial = false;
     this.estadoComponente = false;
-    
+
   }
 }

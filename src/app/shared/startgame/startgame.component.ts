@@ -15,10 +15,11 @@ export class StartgameComponent {
   @Input() public pantallaInicial: boolean = false;
     //Se instancia el eventEmitter que emitera un evento con un string
   @Output() messageEvent = new EventEmitter<boolean>();
-  
+
   cambiarEstado(){
     //el metodo emit sirve para enviar eventos
     this.messageEvent.emit(true)
   }
+
 
 }

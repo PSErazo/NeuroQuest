@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 import {
   AbstractControl,
   FormBuilder,
@@ -30,7 +31,7 @@ export default class SignUpComponent {
     ]
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService:AuthService) {}
 
 
   paswordEqual(field1:string, field2:string){
@@ -74,8 +75,13 @@ export default class SignUpComponent {
       this.signup.markAllAsTouched();
       return;
     }
-    console.log(this.signup.value);
 
+    this.authService.register({
+      name: this.signup.get('username')!.value,
+      email: this.signup.get('email')!.value,
+      password: this.signup.get('newPassword')!.value
+    })
+    console.log(this.signup.value);
     this.signup.reset();
   }
 }
