@@ -1,4 +1,4 @@
-<section class="bg-[#1A1B1B] w-screen py-20">
+<section class="bg-[#1A1B1B] h-[60vh] w-screen py-20">
   @if(estadoComponente){
   <div class="h-full flex flex-col justify-center items-center">
     <div class="flex flex-row gap-5">
@@ -21,7 +21,6 @@
   <app-startgame
     [name]="name"
     [text]="text"
-    [icono]="icono"
     [pantallaInicial]="pantallaInicial"
     [levelScore]="levelScore"
     (messageEvent)="receivingState($event)"

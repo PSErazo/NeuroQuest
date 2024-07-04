@@ -5,12 +5,15 @@ import { ReactionTimeComponent } from './components/reaction-time/reaction-time.
 import { SequenceComponent } from './components/sequence/sequence.component';
 import { TypingComponent } from './components/typing/typing.component';
 import { VisualMemoryComponent } from './components/visual-memory/visual-memory.component';
+import GamesComponent from './pages/games/games.component';
+import LoginComponent from './pages/login/login.component';
+import SignUpComponent from './pages/sign-up/sign-up.component';
 
 export const routes: Routes = [
 
   {
     path: 'game',
-    loadComponent: () => import('./pages/games/games.component'),
+    component: GamesComponent,
     children:[
         {
           path: 'sequencememory',
@@ -45,11 +48,11 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('./pages/login/login.component')
+    component: LoginComponent,
   },
   {
     path: 'singup',
-    loadComponent: () => import('./pages/sign-up/sign-up.component')
+    component: SignUpComponent
   },
   {
     path: '',

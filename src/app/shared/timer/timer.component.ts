@@ -12,9 +12,15 @@ export class TimerComponent implements OnChanges {
 
   @Input() public timerStart: boolean = false;
   @Input() public timerStop: boolean = false;
+  @Input() public microSecOn: boolean = false;
+  @Input() public microSecOff: boolean = false;
+
+
   @Output() timerEvent = new EventEmitter<string>();
   
   mandarScore(){
+
+
     this.timerEvent.emit(this.tiempoScore);
   }
   totalTime = 0;      
@@ -34,10 +40,24 @@ export class TimerComponent implements OnChanges {
         this.stopTimer();
       }
     }
+
+    // Reaction Time
+
+    if (changes['microSecOn']) {
+      if (this.microSecOn){
+        this.setMicroSecOn();
+      }
+    }
+    if (changes['microSecOff']) {
+      if (this.microSecOff){
+        this.setMicroSecOff();
+      }
+    }
   }
  
 
   startTimer(): void {
+    clearInterval(this.interval);
     this.interval = window.setInterval(this.increaseTime.bind(this), 1000);
   }
 
@@ -50,7 +70,6 @@ export class TimerComponent implements OnChanges {
   
   
   }
-  
 
   increaseTime(): void {
     
@@ -72,4 +91,33 @@ export class TimerComponent implements OnChanges {
     timer!.innerHTML = "TIEMPO: " + time;
     this.tiempoScore = `TIEMPO ${time}`;
   }
+
+  // Para el componente Reaction Time / trabajar con microsegundos
+
+  startTimeReact: number = 0;
+
+  setMicroSecOn(): void {
+    clearInterval(this.interval);
+    this.totalTime = 0;
+    this.startTimeReact = performance.now();
+    this.interval = window.setInterval(this.increaseMicroTime.bind(this), 1);
+  }
+
+  setMicroSecOff(): void {
+    this.mandarScore()
+     clearInterval(this.interval);
+     this.totalTime = 0;
+     this.setMicroTime("0")
+   }
+
+   increaseMicroTime(): void {
+    const currentTime = performance.now();
+    this.totalTime = Math.floor(currentTime - this.startTimeReact);
+    this.setMicroTime(`${this.totalTime}`);
+  }
+
+  setMicroTime(time: string): void {
+    this.tiempoScore = `TIEMPO ${time} ms`;
+  }
+
 }
