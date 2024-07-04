@@ -265,8 +265,13 @@ export class VisualMemoryComponent {
       if (this.bloqueselegibles === this.aciertos) {
 
         let section = document.querySelector(`section`);
-        section?.classList.remove(`bg-[#1A1B1B]`);
-        section?.classList.add(`bg-[#B6F9D5]`);
+        section?.classList.add(`rectangulo`);
+        setTimeout(() => {
+          section?.classList.remove(`rectangulo`);
+        }, 900);
+       
+        
+       
 
         setTimeout(() => {
 
@@ -325,6 +330,15 @@ export class VisualMemoryComponent {
       this.selectQuadrate.push(quadrate);
       //Si llegas a tres errados por nivel
       if (this.errados === 3) {
+        
+        let section = document.querySelector(`section`);
+        section?.classList.add(`rectangulo-erroneo`);
+        setTimeout(() => {
+          section?.classList.remove(`rectangulo-erroneo`);
+        }, 900);
+       
+
+
         this.selectQuadrate = [];
         setTimeout(() => {
           this.pintadosCorrectos.forEach((element) => {

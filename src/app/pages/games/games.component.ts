@@ -22,31 +22,31 @@ export default class GamesComponent {
       name: 'Sequence Memory',
       router: 'sequencememory',
       text: '¿Eres capaz de recordar el patron?',
-      icono: "assets/sequence.svg"
+      icono: "assets/sequencebutton.svg"
     },
     {
       name: 'Visual Memory',
       router: 'visualmemory',
       text: 'Solo un cerebro como el mío puede memorizar tanto',
-      icono: "assets/sequence.svg"
+      icono: "assets/sequencebutton.svg"
     },
     {
       name: 'Typing',
       router: 'typing',
       text: '¿Eres rápido con los dedos? Demuestralo!',
-      icono: "assets/sequence.svg"
+      icono: "assets/typing.svg"
     },
     {
       name: 'Aim Trainer',
       router: 'aimtrainer',
       text: '¿Que tán preciso y rápido eres?',
-      icono: "assets/sequence.svg"
+      icono: "assets/aimtrainer.svg"
     },
     {
       name: 'Number Memory',
       router: 'numbermemory',
       text: '¿Cuántas cifras puedes memorizar?',
-      icono: "assets/sequence.svg"
+      icono: "assets/numbermemory.svg"
     },
     {
       name: 'Reaction Time',
