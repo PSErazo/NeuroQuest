@@ -17,6 +17,7 @@ export class TypingComponent implements OnInit {
   tiempo: string = '';
   startTime!: number;
   endTime!: number;
+  pantallaInicial:boolean = true;
   name:string = "Typing";
   text:string = "Cuantas palabras por minuto puedes tipear?"
   estadoComponente:boolean = false;
