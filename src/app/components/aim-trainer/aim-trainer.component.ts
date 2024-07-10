@@ -13,8 +13,9 @@ import { StartgameComponent } from '../../shared/startgame/startgame.component';
 
 export class AimTrainerComponent{
 
-  timerStart: boolean = false;
-  timerStop : boolean = false;
+  microSecOn: boolean = false;
+  microSecOff : boolean = false;
+  timerMinSec : boolean = false;
   timerScore: string = "";
   hits: number = 30;
   interval: any;
@@ -33,8 +34,9 @@ export class AimTrainerComponent{
   }
 
   startGame(){
-    this.timerStart = true;
-    this.timerStop = false
+    this.microSecOn = true
+    this.microSecOff = false
+    this.timerMinSec = true
        this.createRandomCircle();
   }
 
@@ -44,7 +46,6 @@ export class AimTrainerComponent{
       this.startGame();
     }
   }
-
 
 
   createRandomCircle(): void {    
@@ -79,9 +80,8 @@ export class AimTrainerComponent{
       this.hits = 30
      
       this.pantallaInicial = false;
-      console.log(this.timerStart)
-      this.timerStop = true;
-      console.log(this.timerStop)
+      this.microSecOff = true;
+      this.timerMinSec = false;
       let circle: HTMLElement | null = document.querySelector(".circle");
       circle!.style.display = "none"; 
       console.log("DETENIDO");
@@ -90,13 +90,13 @@ export class AimTrainerComponent{
         this.mostrarScore()
     
      
-        }, 500);
+        }, );
     
       
     }
   }
    mostrarScore(){
-    if(this.timerStop){
+    if(this.microSecOff){
        this.estadoComponente = false;
     }
    }
