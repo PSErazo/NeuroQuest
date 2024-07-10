@@ -15,8 +15,8 @@ export default class LoginComponent {
 
 
   public login: FormGroup = this.fb.group({
-    email: ['pp@ppp.com', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-    password: ['74352215pqe', [Validators.required, Validators.minLength(8)]],
+    email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
   constructor(private fb: FormBuilder, private authService:AuthService, private router: Router){}

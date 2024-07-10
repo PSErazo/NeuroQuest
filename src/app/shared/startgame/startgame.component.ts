@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component,EventEmitter,Input, Output } from '@angular/core';
+import { GamesService } from '../../services/games.service';
+import { ScoreGame } from '../interfaces/Game';
 
 @Component({
   selector: 'app-startgame',
@@ -16,10 +18,22 @@ export class StartgameComponent {
     //Se instancia el eventEmitter que emitera un evento con un string
   @Output() messageEvent = new EventEmitter<boolean>();
 
+  constructor(private gameService: GamesService){
+
+  }
   cambiarEstado(){
     //el metodo emit sirve para enviar eventos
     this.messageEvent.emit(true)
   }
 
+  saveScore(){
+    let scoreGame: ScoreGame = {
+      email : localStorage.getItem('email')?? 'email@gmail.com',
+      game: this.name,
+      score: this.levelScore
+    }
+    this.gameService.saveScore(scoreGame)
+
+  }
 
 }

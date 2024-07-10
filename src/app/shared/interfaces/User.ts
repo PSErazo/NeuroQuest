@@ -7,7 +7,8 @@ export interface NewUser extends User {
   name: string;
 }
 
-export interface userResponse extends User{
+export interface userResponse{
   token: string;
+  user: NewUser
 }
 
