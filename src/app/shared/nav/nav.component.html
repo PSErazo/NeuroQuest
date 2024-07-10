@@ -17,7 +17,7 @@
     }
     @else {
       <li>{{name}}</li>
-      <li class="hover:opacity-50"><a routerLink="/login">logout</a></li>
+      <li class="hover:opacity-50" (click)="logout()">logout</li>
     }
   </ul>
 </nav>
