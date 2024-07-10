@@ -13,10 +13,12 @@
         </div>
         }@else{
           <h1 class="text-2xl text-[#519A73] font-normal text-center">{{name}}</h1>
-            <p class="text-[#519A73] text-7xl font-semibold text-center my-3">{{levelScore}}</p>
+            <p class="text-[#519A73] text-7xl font-semibold text-center my-3">{{levelScore || levelScoreN}}</p>
           <div class="mt-4 py-0.5 px-0.5">
             <p class="text-[#519A73] text-xl font-normal text-center mb-9">save your score to see how you compare</p>
-            <a class="px-7 py-2 bg-[#c65956] rounded font-bold my-5 cursor-pointer mx-1.5" (click)="saveScore()" >Save Score</a>
+            @if (!saved) {
+              <a class="px-7 py-2 bg-[#c65956] rounded font-bold my-5 cursor-pointer mx-1.5" (click)="saveScore()" >Save Score</a>
+            }
             <a class="px-7 py-2 bg-[#FAA7A5] rounded font-bold my-5 cursor-pointer mx-1.5" (click)="cambiarEstado()">Try Again</a>
           </div>
 

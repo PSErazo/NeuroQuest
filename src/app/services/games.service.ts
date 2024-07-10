@@ -15,9 +15,16 @@ export class GamesService {
    }
 
    saveScore(saveScore:ScoreGame) {
+     let token = localStorage.getItem('token');
 
-    return this.http.post(`${url}auth/register`, saveScore)
+     if (token) {
+    console.log("hay token", token);
 
+      return this.http.post(`${url}score`, saveScore,{headers: {'Authorization': `Bearer ${token}`}});
+
+     }
+    console.log('no hay')
+     return
   }
 
 }
