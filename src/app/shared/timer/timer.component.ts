@@ -14,9 +14,13 @@ export class TimerComponent implements OnChanges {
   @Input() public timerStop: boolean = false;
   @Input() public microSecOn: boolean = false;
   @Input() public microSecOff: boolean = false;
+
+
   @Output() timerEvent = new EventEmitter<string>();
   
   mandarScore(){
+
+
     this.timerEvent.emit(this.tiempoScore);
   }
   totalTime = 0;      
@@ -66,7 +70,6 @@ export class TimerComponent implements OnChanges {
   
   
   }
-  
 
   increaseTime(): void {
     

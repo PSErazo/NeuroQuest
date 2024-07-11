@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 import {
   AbstractControl,
   FormBuilder,
@@ -8,6 +9,8 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { User } from '../../shared/interfaces/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -30,7 +33,7 @@ export default class SignUpComponent {
     ]
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService:AuthService, private router: Router) {}
 
 
   paswordEqual(field1:string, field2:string){
@@ -74,8 +77,32 @@ export default class SignUpComponent {
       this.signup.markAllAsTouched();
       return;
     }
-    console.log(this.signup.value);
 
-    this.signup.reset();
+    this.authService.register({
+      name: this.signup.get('username')!.value,
+      email: this.signup.get('email')!.value,
+      password: this.signup.get('newPassword')!.value
+    }).subscribe(data => {
+      console.log("data", data);
+      console.log( this.signup.get('email')!.value);
+
+      this.onLogin({email: this.signup.get('email')!.value, password: this.signup.get('newPassword')!.value})
+    })
+
+      // this.onLogin({email: this.signup.get('email')!.value, password:this.signup.get('newPassword')!.value})
+
+  }
+
+
+  onLogin(user: User): void {
+    console.log('useru',user);
+
+    this.authService.login(user)
+    .subscribe( u => {
+        console.log('useru',u);
+        this.signup.reset();
+        this.router.navigate(['/']);
+      });
+
   }
 }

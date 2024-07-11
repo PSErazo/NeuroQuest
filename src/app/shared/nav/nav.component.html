@@ -11,7 +11,13 @@
     <li class="hover:opacity-50"><a>DASHBOARD</a></li>
   </ul>
   <ul class="flex flex-row text-lg gap-4">
-    <li class="hover:opacity-50"><a routerLink="/singup">SIGN UP</a></li>
-    <li class="hover:opacity-50"><a routerLink="/login">LOGIN</a></li>
+    @if (!login) {
+      <li class="hover:opacity-50"><a routerLink="/singup">SIGN UP</a></li>
+      <li class="hover:opacity-50"><a routerLink="/login">LOGIN</a></li>
+    }
+    @else {
+      <li>{{name}}</li>
+      <li class="hover:opacity-50" (click)="logout()">logout</li>
+    }
   </ul>
 </nav>

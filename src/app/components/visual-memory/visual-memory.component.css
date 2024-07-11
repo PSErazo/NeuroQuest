@@ -50,3 +50,66 @@
   75% { transform: translateX(5px); }
   100% { transform: translateX(0); }
 }
+.rectangulo::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: correcto 0.9s forwards ease ;
+
+  opacity: 0;
+}
+
+
+.rectangulo-erroneo::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: erroneo 0.9s forwards ease ;
+
+  opacity: 0;
+}
+
+@keyframes correcto{
+  0%{
+     opacity: 0;
+     z-index: 1;
+  }
+  50%{
+    opacity: 0.3;
+    background-color: #519A73; 
+    z-index: 1;
+  }
+  100%{
+    opacity: 0;
+    z-index: 1;
+ 
+  }
+ }
+
+
+ 
+@keyframes erroneo{
+  0%{
+     opacity: 0;
+     z-index: 1;
+  }
+  50%{
+    opacity: 0.3;
+    background-color:#c65956; 
+    z-index: 1;
+  }
+  100%{
+    opacity: 0;
+    z-index: 1;
+ 
+  }
+ }
+ .container-section{
+position: relative;
+ }
