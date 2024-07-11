@@ -1,29 +1,18 @@
-<section class="bg-[#1A1B1B] w-screen h-[60vh]  flex flex-col justify-center items-center">
+<section class="bg-[#1A1B1B] w-screen h-[60vh]">
   @if(estadoComponente){
-  <div class="containertyping ">
-    <!-- <div class="bg-[#1A1B1B] w-screen h-[60vh] text-white"> -->
-    <h1>Comparador de Texto</h1>
-    <p class="texto_blanco">Texto predefinido:</p>
-    <div class="div_textopredefinido">
-      <p id="textoPredefinido">{{ textoPredefinido }}</p>
+    <div class="h-full flex items-center">
+      <div class="game" tabindex="0">
+        <div class="text-3xl text-[#ffffff] mb-3 ml-3">Correctas: {{correctas}}</div>
+        <div id="words"></div>
+        <div id="cursor"></div>
+        </div>
     </div>
-    <label for="textoUsuario">Ingresa el texto:</label>
-    <input
-      type="text"
-      id="textoUsuario"
-      [(ngModel)]="textoUsuario"
-      (keydown)="onKeyDown()"
-      (keyup)="onKeyUp()"
-      (paste)="preventAction($event)"
-      (copy)="preventAction($event)"
-    />
-    <p class="texto_blanco" id="resultado">{{ resultado }}</p>
-    <p class="texto_blanco" id="tiempo">{{ tiempo }}</p>
-  </div>
   }@else{
   <app-startgame
     [name]="name"
     [text]="text"
+    [levelScore]="score"
+    [pantallaInicial]="pantallaInicial"
     (messageEvent)="receivingState($event)"
   ></app-startgame>
   }
