@@ -1,49 +1,17 @@
-<section class="bg-[#1A1B1B] w-screen h-[60vh] h-full flex flex-col justify-center items-center">
+<section class="bg-[#1A1B1B] w-screen h-[60vh]">
   @if(estadoComponente){
-  <div class="max-w-2xl mx-auto p-5 bg-[#1A1B1B] rounded-lg shadow-md">
-    <h1 class="text-center text-white text-2xl font-bold">Comparador de Texto</h1>
-    <p class="texto_verde grande" id="contadorPalabras">Palabras: 0</p>
-    <p class="texto_verde">Texto predefinido:</p>
-    <div class="bg-white border border-gray-300 rounded-md p-3 my-2">
-      <p id="textoPredefinido">{{ textoPredefinido }}</p>
+    <div class="h-full flex items-center">
+      <div class="game" tabindex="0">
+        <div class="text-3xl text-[#ffffff] mb-3 ml-3">Correctas: {{correctas}}</div>
+        <div id="words"></div>
+        <div id="cursor"></div>
+        </div>
     </div>
-    <label for="textoUsuario" class="block mb-1 texto_verde">Ingresa el texto:</label>
-    <input
-      autofocus
-      type="text"
-      id="textoUsuario"
-      [(ngModel)]="textoUsuario"
-      (keydown)="onKeyDown()"
-      (keyup)="onKeyUp()"
-      (paste)="preventAction($event)"
-      (copy)="preventAction($event)"
-      class="w-full p-2 mb-3 border border-gray-300 rounded-md"
-      placeholder="Escribe el texto..."
-    />
-
-    <p class="texto_verde" id="resultado">{{ resultado }}</p>
-    <p class="texto_verde" id="tiempo">{{ tiempo }}</p>
-
-    <p class="texto_verde" id="logro"></p>
-
-    <!--<button
-      id="reiniciarBtn"
-      (click)="reiniciarJuego()"
-      class="hidden mt-4 bg-green-500 text-white p-2 rounded-md"
-    >
-      Reiniciar Juego
-    </button>-->
-
-    <div class="text-center mt-6">
-      <a id="reiniciarBtn" class="hidden px-7 py-2 bg-[#c65956] rounded font-bold my-5 cursor-pointer" 
-      (click)="reiniciarJuego()">Reiniciar Juego</a>
-  </div>
-    
-  </div>
   }@else{
   <app-startgame
     [name]="name"
     [text]="text"
+    [levelScore]="score"
     [pantallaInicial]="pantallaInicial"
     (messageEvent)="receivingState($event)"
   ></app-startgame>

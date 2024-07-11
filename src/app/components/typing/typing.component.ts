@@ -10,22 +10,26 @@ import { StartgameComponent } from '../../shared/startgame/startgame.component';
   templateUrl: './typing.component.html',
   styleUrl: './typing.component.css',
 })
-export class TypingComponent implements OnInit {
+export class TypingComponent {
   textoPredefinido: string = '';
   textoUsuario: string = '';
   resultado: string = '';
   tiempo: string = '';
   startTime!: number;
   endTime!: number;
-  pantallaInicial: boolean = true;
-  name:string = "Typing Challenge";
-  text:string = "Cuantas palabras por segundo puedes tipear?"
+  pantallaInicial:boolean = true;
+  name:string = "Typing";
+  text:string = "Cuantas palabras por minuto puedes tipear?"
   estadoComponente:boolean = false;
-  
+ //texto separado por palabras
+  words:string[] = "i dont wanna wait come take it".split(" ")
+  wordsCount:number = this.words.length
+  correctas:number = 0
+  score:string = ""
+
+
   startGame(){
-    this.textoPredefinido = this.generarTextoAleatorio(
-      this.generarNumeroAleatorio()
-    );
+    this.newGame()
   }
 
   receivingState(estate:boolean):void{
@@ -36,159 +40,137 @@ export class TypingComponent implements OnInit {
   }
 
 
-  textos = [
-    'La Luna brilla en el cielo nocturno, iluminando suavemente la tierra. Sus cráteres y mares son testigos silenciosos de la historia de nuestro mundo. En la antigüedad, era adorada como una deidad, inspirando mitos y leyendas. Hoy, la Luna sigue cautivando nuestra imaginación, recordándonos nuestra conexión con el universo.',
-    'En lo profundo del bosque se encuentra un lugar mágico, donde los árboles susurran secretos antiguos y las hadas danzan en la luz filtrada. El aire está lleno de fragancias frescas y el suelo está cubierto de musgo suave. Quienes se aventuran aquí sienten la calma y la maravilla de lo natural.',
-    'El viaje del alma es como un río que fluye sin cesar, encontrando su camino a través de la vida. A veces tranquilo, a veces tumultuoso, siempre lleva consigo la sabiduría de las experiencias pasadas. En su curso, el alma crece, aprende y se transforma, buscando su verdadero propósito y destino.',
-    'El pintor se sienta frente al lienzo en blanco, con pinceles en mano y colores brillantes a su alrededor. Con cada trazo, da vida a su imaginación, creando paisajes, retratos y emociones. Cada obra es única, una ventana al mundo interior del artista y una expresión de belleza.',
-    'La ciudad despierta lentamente, con los primeros rayos del sol iluminando sus calles. Los comerciantes abren sus tiendas, los trabajadores se apresuran hacia sus empleos y los parques se llenan de gente disfrutando del día. La ciudad bulle de actividad, vibrando con la energía de sus habitantes.',
-    'El colibrí, con sus brillantes plumas y su rápido aleteo, es un espectáculo de gracia y belleza. Revolotea de flor en flor, buscando néctar con su largo pico. Su vuelo es un ballet aéreo, una danza de vida y movimiento. El colibrí es un recordatorio de la delicadeza y la fuerza en la naturaleza.',
-    'El libro antiguo descansa en una estantería polvorienta, sus páginas amarillentas y sus letras desgastadas por el tiempo. Contiene historias olvidadas, secretos perdidos y conocimientos ancestrales. Al abrir sus páginas, se abre una ventana al pasado, permitiendo que sus historias perduren en el presente.',
-    'En primavera, el jardín se despierta de su letargo invernal, llenándose de vida y color. Las flores florecen en una explosión de tonos brillantes, y los árboles se visten de verde fresco. Las abejas zumban entre las flores, llevando el polen de una a otra. El jardín es un remanso de belleza y tranquilidad.',
-    'El astrónomo observa el cielo nocturno, fascinado por la inmensidad del universo. A través de su telescopio, ve galaxias distantes, estrellas nacientes y planetas en órbita. Cada punto de luz en el cielo cuenta una historia de millones de años. El astrónomo siente la humildad y la grandeza del cosmos.',
-    'En otoño, el viento susurra entre las hojas doradas, creando una melodía suave y melancólica. Los árboles se despojan de su vestido de verano, preparándose para el reposo invernal. El suelo se cubre de hojas crujientes, creando un tapiz de colores cálidos. El otoño es una sinfonía de cambio y transformación.'
-  ];
-
-  generarTextoAleatorio(lugar: number): string {
-    return this.textos[lugar];
+  addClass(el: HTMLElement,name: string){
+    el.className += ' ' + name
   }
 
-  generarNumeroAleatorio(): number {
-    let cantidad = this.textos.length;
-    return Math.floor(Math.random() * cantidad);
+  removeClass(el: HTMLElement,name:string){
+    el.className = el.className.replace(name,' ')
   }
-
-  ngOnInit(): void {
-   
-  }
-
-  onKeyDown() {
-    if (!this.startTime) {
-      this.startTime = new Date().getTime();
+  //generador de palabras 
+  randomWord(){
+    const randomIndex = Math.floor(Math.random() * this.wordsCount)
+    return this.words[randomIndex]
     }
-  }
-
-  onKeyUp() {
-    const textoUsuario = this.textoUsuario;
-    let resultadoHtml = '';
-
-    for (let i = 0; i < this.textoPredefinido.length; i++) {
-      if (i < textoUsuario.length) {
-        if (this.textoPredefinido[i] === textoUsuario[i]) {
-          resultadoHtml += `<span class='bg-[#519A73] text-white'>${this.textoPredefinido[i]}</span>`;
-        } else {
-          resultadoHtml += `<span class='bg-[#c65956] text-white'>${this.textoPredefinido[i]}</span>`;
-        }
-      } else {
-        resultadoHtml += this.textoPredefinido[i];
-      }
+  //cada palabra generada
+  formatWord(word:string){
+      return `<div class="word inline-block ml-3"><span class="letter quit">${word.split("").join('</span><span class="letter quit">')}</span></div>`
     }
-
-    document.getElementById('textoPredefinido')!.innerHTML = resultadoHtml;
-
-    this.actualizarContadorPalabras(textoUsuario);
-
-    if (textoUsuario.length >= this.textoPredefinido.length) {
-      this.endTime = new Date().getTime();
-      let tiempoTranscurrido = (this.endTime - this.startTime) / 1000;
-      //this.tiempo = `Tiempo: ${tiempoTranscurrido.toFixed(2)} segundos`;
-
-      let coinciden = true;
-      for (let i = 0; i < this.textoPredefinido.length; i++) {
-        if (this.textoPredefinido[i] !== textoUsuario[i]) {
-          coinciden = false;
-          break;
-        }
-      }
-
-      const logroElemento = document.getElementById('logro');
-
-      if (coinciden) {
-        //sthis.resultado = 'El texto ingresado coincide con el texto predefinido.';
-          if (logroElemento) {
-            const palabras = this.contarPalabras(textoUsuario);
-            logroElemento.innerText = `LOGRADO!!! Has escrito ${palabras} palabras en ${tiempoTranscurrido.toFixed(2)} segundos`;
-          }
-      } else {
-        //this.resultado = 'El texto ingresado no coincide con el texto predefinido.';
-          if (logroElemento) {
-            const palabras = this.contarPalabras(textoUsuario);
-            logroElemento.innerText = `NO COINCIDE!!! Has escrito ${palabras} palabras en ${tiempoTranscurrido.toFixed(2)} segundos, pero hay errores en el texto ingresado.`;
-          }
-      }
-
-      const campoTexto = document.getElementById('textoUsuario') as HTMLInputElement;
-      if (campoTexto) {
-        campoTexto.disabled = true;
-      }
+  newGame(){
+    setTimeout(()=>{
+       let words = document.getElementById('words')
+         
+       if(words){
+        words.innerHTML = '' 
+       }
       
-      // Actualizar el mensaje de logro
-      const palabras = this.contarPalabras(textoUsuario);
-      //const logroElemento = document.getElementById('logro');
-      /*if (logroElemento) {
-        logroElemento.innerText = `LOGRADO!!! Has escrito ${palabras} palabras en ${tiempoTranscurrido.toFixed(2)} segundos`;
-      }*/
-
-      // Mostrar el botón de reinicio
-      const reiniciarBtn = document.getElementById('reiniciarBtn');
-      if (reiniciarBtn) {
-        reiniciarBtn.classList.remove('hidden');
+      //se imprimen 200 palabras
+      for( let i = 0; i < 100; i++ ){
+        if(words){
+          words.innerHTML += this.formatWord(this.randomWord())
+         }
+        
+    
+      }
+      let classWord =  document.querySelector('.word') as HTMLElement
+      let classLetter =  document.querySelector('.letter') as HTMLElement
+      if(classWord ){
+        this.addClass(classWord,'current')
+      }
+     
+      if(classLetter){
+        this.addClass(classLetter,'current')
       }
 
+      const gameContainer = document.querySelector('.game') as HTMLElement;
+      
+      gameContainer.addEventListener('keydown',(e: KeyboardEvent) => {
+        e.preventDefault() 
+        const key = e.key
+        console.log("se presiono una tecla" + key)
+        const currentWord = document.querySelector('.word.current') as HTMLElement;
+        const currentLetter = document.querySelector('.letter.current') as HTMLElement;
+        const expected = currentLetter?.innerHTML || ' '
+        
+        
+        const isLetter = key.length === 1 && key !== ' '
+        const space = " "
+        
+
+        if(isLetter){
+         if(currentLetter){
+            if(key === expected){
+                  this.correctas++
+            }
+            this.addClass(currentLetter, key === expected ? 'text-[#00d288]' : 'text-[#c65956]')
+            this.removeClass(currentLetter,'quit')
+            this.removeClass(currentLetter,'current')
+           
+            if(currentLetter.nextSibling){
+              const nextLetter = currentLetter.nextElementSibling as HTMLElement;
+              this.addClass(nextLetter,'current')
+            }
+           
+         }
+        }
+        if(key === space){
+          
+          if(expected !== ' '){
+            const nodeList: NodeListOf<Element> = document.querySelectorAll('.word.current .letter.quit');
+            console.log(nodeList)
+            const elementsArray: HTMLElement[] = Array.from(nodeList) as HTMLElement[];
+       
+            
+          
+
+
+            elementsArray.forEach(letter => {
+              this.addClass(letter,'text-[#c65956]')
+            })
+          }
+           if(currentWord.nextElementSibling){
+            const nextWord = currentWord.nextElementSibling as HTMLElement;
+            this.removeClass(currentWord,'current')
+            this.addClass(nextWord,'current')
+            if(currentLetter){
+  
+              this.removeClass(currentLetter,'current')
+           
+            }
+          
+            const firstChild = nextWord && nextWord.firstElementChild;
+            if (firstChild instanceof HTMLElement) {
+              this.addClass(firstChild, 'current');
+            }
+           }else{
+             this.score = String(this.correctas)
+             this.estadoComponente = false
+             this.pantallaInicial = false 
+             this.restartGame()
+             
+           }
+     
+           
+        }
+        
+        })
+
+    },)
+
     }
+
+  restartGame(){
+    this.correctas = 0
+    this.newGame()
   }
+  
 
-  actualizarContadorPalabras(texto: string) {
-    const palabras = this.contarPalabras(texto);
-    console.log(`Palabras: ${palabras}`);  // Agregado para depuración
-    const contadorPalabrasElemento = document.getElementById('contadorPalabras');
-    if (contadorPalabrasElemento) {
-      contadorPalabrasElemento.innerText = `Palabras: ${palabras}`;
-    } else {
-      console.error('Elemento contadorPalabras no encontrado');  // Agregado para depuración
-    }
-  }
 
-  contarPalabras(texto: string): number {
-    return texto.trim().split(/\s+/).filter(word => word.length > 0).length;
-  }
 
-  preventAction(event: ClipboardEvent) {
-    event.preventDefault();
-  }
 
-  reiniciarJuego() {
-    this.textoPredefinido = '';
-    this.textoUsuario = '';
-    this.resultado = '';
-    this.tiempo = '';
-    this.startTime = 0;
-    this.endTime = 0;
-    this.pantallaInicial = true;
-    this.estadoComponente = false;
-    this.name = "Typing Challenge";
-    this.text = "Cuantas palabras por segundo puedes tipear?";
-    this.startGame();
-    const campoTexto = document.getElementById('textoUsuario') as HTMLInputElement;
-    if (campoTexto) {
-      campoTexto.disabled = false;
-    }
-    // Ocultar el botón de reinicio
-    const reiniciarBtn = document.getElementById('reiniciarBtn');
-    if (reiniciarBtn) {
-      reiniciarBtn.classList.add('hidden');
-    }
 
-    // Limpiar el contenido del mensaje de logro
-    const logroElemento = document.getElementById('logro');
-    if (logroElemento) {
-      logroElemento.innerText = '';
-    }
 
-    // Limpiar el texto predefinido formateado
-    const textoPredefinidoElemento = document.getElementById('textoPredefinido');
-    if (textoPredefinidoElemento) {
-      textoPredefinidoElemento.innerHTML = '';
-    }
-  }
+
+    
 }
+

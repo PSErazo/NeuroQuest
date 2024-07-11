@@ -4,7 +4,7 @@
     <div class="screen-1">
       <h1>¡Da click cuando la pantalla sea color verde!</h1>
     </div>
-    <app-timer [microSecOn]="microSecOn" [microSecOff]="microSecOff" class="timer" (timerEvent)="receivingTimer($event)" style="display: none"></app-timer>
+    <app-timer [microSecOn]="microSecOn" [microSecOff]="microSecOff" class="timer" (timerEvent)="receivingTimer($event)"></app-timer>
     <div class="screen-2" style="display: none" (click)="stopTimeClick($event)"><h1>Click!</h1></div>
   }@else{
     <app-startgame [pantallaInicial]="pantallaInicial" [name]="name" [text]="text" [levelScore] = "timerScore" (messageEvent)="receivingState($event)"></app-startgame>

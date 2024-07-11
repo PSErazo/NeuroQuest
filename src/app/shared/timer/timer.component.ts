@@ -14,6 +14,7 @@ export class TimerComponent implements OnChanges {
   @Input() public timerStop: boolean = false;
   @Input() public microSecOn: boolean = false;
   @Input() public microSecOff: boolean = false;
+  @Input() public timerMinSec: boolean = false;
 
 
   @Output() timerEvent = new EventEmitter<string>();
@@ -28,20 +29,7 @@ export class TimerComponent implements OnChanges {
   tiempoScore: string = "";
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['timerStart']) {
-      if (this.timerStart){
-        console.log(`SE CAMBIO A TRUE`)
-        this.startTimer();
-      }
-    }
-    if(changes['timerStop']){
-      if (this.timerStop){
-        console.log(`SE CAMBIO A FALSE`)
-        this.stopTimer();
-      }
-    }
 
-    // Reaction Time
 
     if (changes['microSecOn']) {
       if (this.microSecOn){
@@ -53,46 +41,12 @@ export class TimerComponent implements OnChanges {
         this.setMicroSecOff();
       }
     }
+    if (changes['timerMinSec']) {
+      if (this.timerMinSec){
+        this.setTimerMinSec();
+      }
+    }
   }
- 
-
-  startTimer(): void {
-    clearInterval(this.interval);
-    this.interval = window.setInterval(this.increaseTime.bind(this), 1000);
-  }
-
-  stopTimer(): void {
-   console.log(`${this.tiempoScore}`)
-   this.mandarScore()
-    clearInterval(this.interval);
-    this.totalTime = 0;
-    this.setTime("00:00")
-  
-  
-  }
-
-  increaseTime(): void {
-    
-    this.totalTime++;
-    
-    const minutes = Math.floor(this.totalTime / 60);
-    const seconds = this.totalTime % 60;
-
-    // Formateamos los minutos y segundos con ceros a la izquierda si son menores que 10
-    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
-    const formattedSeconds = seconds < 10 ? '0' + seconds : seconds.toString();
-
-    this.setTime(`${formattedMinutes}:${formattedSeconds}`);
-    
-  }
-
-  setTime(time: string): void {
-    let timer: HTMLElement | null = document.querySelector(".timer");
-    timer!.innerHTML = "TIEMPO: " + time;
-    this.tiempoScore = `TIEMPO ${time}`;
-  }
-
-  // Para el componente Reaction Time / trabajar con microsegundos
 
   startTimeReact: number = 0;
 
@@ -114,7 +68,37 @@ export class TimerComponent implements OnChanges {
     const currentTime = performance.now();
     this.totalTime = Math.floor(currentTime - this.startTimeReact);
     this.setMicroTime(`${this.totalTime}`);
+    console.log(this.totalTime)
+
+    if(this.showTimer) {
+      
+    const minutes = Math.floor(this.totalTime / 60000);
+    const seconds = Math.floor((this.totalTime % 60000) / 1000);
+
+    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
+    const formattedSeconds = seconds < 10 ? '0' + seconds : seconds.toString();
+  
+      this.setTime(`${formattedMinutes}:${formattedSeconds}`);
+    }
+
   }
+
+   // Contador en minutos y segundos
+
+  showTimer: boolean = false
+
+   setTimerMinSec(): void {
+
+    this.showTimer = true
+    
+  }
+
+  setTime(time: string): void {
+    let timer: HTMLElement | null = document.querySelector(".timer");
+    timer!.innerHTML = "TIEMPO: " + time;
+  }
+
+  // Mostrar Score
 
   setMicroTime(time: string): void {
     this.tiempoScore = `TIEMPO ${time} ms`;
