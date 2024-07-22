@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges,Output,EventEmitter } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-timer',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './timer.component.html',
-  styleUrl: './timer.component.css'
+  styleUrls: ['./timer.component.css']
 })
-export class TimerComponent implements OnChanges {
+export class TimerComponent implements OnChanges, OnDestroy {
 
   @Input() public timerStart: boolean = false;
   @Input() public timerStop: boolean = false;
@@ -16,33 +16,29 @@ export class TimerComponent implements OnChanges {
   @Input() public microSecOff: boolean = false;
   @Input() public timerMinSec: boolean = false;
 
-
   @Output() timerEvent = new EventEmitter<string>();
   
-  mandarScore(){
-
-
+  mandarScore() {
     this.timerEvent.emit(this.tiempoScore);
   }
+
   totalTime = 0;      
   interval: any;
   tiempoScore: string = "";
 
   ngOnChanges(changes: SimpleChanges): void {
-
-
     if (changes['microSecOn']) {
-      if (this.microSecOn){
+      if (this.microSecOn) {
         this.setMicroSecOn();
       }
     }
     if (changes['microSecOff']) {
-      if (this.microSecOff){
+      if (this.microSecOff) {
         this.setMicroSecOff();
       }
     }
     if (changes['timerMinSec']) {
-      if (this.timerMinSec){
+      if (this.timerMinSec) {
         this.setTimerMinSec();
       }
     }
@@ -58,50 +54,49 @@ export class TimerComponent implements OnChanges {
   }
 
   setMicroSecOff(): void {
-    this.mandarScore()
-     clearInterval(this.interval);
-     this.totalTime = 0;
-     this.setMicroTime("0")
-   }
+    this.mandarScore();
+    clearInterval(this.interval);
+    this.totalTime = 0;
+    this.setMicroTime("0");
+  }
 
-   increaseMicroTime(): void {
+  increaseMicroTime(): void {
     const currentTime = performance.now();
     this.totalTime = Math.floor(currentTime - this.startTimeReact);
     this.setMicroTime(`${this.totalTime}`);
-    console.log(this.totalTime)
+    console.log(this.totalTime);
 
-    if(this.showTimer) {
-      
-    const minutes = Math.floor(this.totalTime / 60000);
-    const seconds = Math.floor((this.totalTime % 60000) / 1000);
+    if (this.showTimer) {
+      const minutes = Math.floor(this.totalTime / 60000);
+      const seconds = Math.floor((this.totalTime % 60000) / 1000);
 
-    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
-    const formattedSeconds = seconds < 10 ? '0' + seconds : seconds.toString();
+      const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
+      const formattedSeconds = seconds < 10 ? '0' + seconds : seconds.toString();
   
       this.setTime(`${formattedMinutes}:${formattedSeconds}`);
     }
-
   }
 
-   // Contador en minutos y segundos
+  // Contador en minutos y segundos
+  showTimer: boolean = false;
 
-  showTimer: boolean = false
-
-   setTimerMinSec(): void {
-
-    this.showTimer = true
-    
+  setTimerMinSec(): void {
+    this.showTimer = true;
   }
 
   setTime(time: string): void {
     let timer: HTMLElement | null = document.querySelector(".timer");
-    timer!.innerHTML = "TIEMPO: " + time;
+    if (timer) {
+      timer.innerHTML = "TIEMPO: " + time;
+    }
   }
 
   // Mostrar Score
-
   setMicroTime(time: string): void {
     this.tiempoScore = `TIEMPO ${time} ms`;
   }
 
+  ngOnDestroy(): void {
+    clearInterval(this.interval);
+  }
 }
