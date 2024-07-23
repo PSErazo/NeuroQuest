@@ -17,17 +17,13 @@ export class AuthService {
   @Output()
   loginEmitter = new EventEmitter<boolean>();
 
-
-
   private user?: NewUser
 
   constructor(private http: HttpClient) {}
 
-  cambiosPersona(islog:boolean) {
+  isLoggedIn(islog:boolean) {
     this.loginEmitter.emit(islog);
   }
-
-
 
   get currentUser(): User | undefined {
     if ( !this.user ) return undefined;
@@ -35,12 +31,8 @@ export class AuthService {
   }
 
   register(newUser:NewUser) {
-
     return this.http.post(`${url}auth/register`, newUser)
   }
-  // this.login({email: newUser.email, password: newUser.password})
-
-
 
   login(user: User): Observable<userResponse>{
     return this.http.post<userResponse>(`${url}auth/login`,user)
@@ -49,7 +41,7 @@ export class AuthService {
       tap( user => localStorage.setItem('token', user.token )),
       tap( user => {
         localStorage.setItem('user', JSON.stringify(user.user) )
-        this.cambiosPersona(true)
+        this.isLoggedIn(true)
       }
       ),
     );
