@@ -1,6 +1,6 @@
-<section class="bg-[#1A1B1B] w-screen h-[60vh]">
+<section class="bg-[#1A1B1B] h-[600px]">
   @if(estadoComponente){
-  <div class="stats">
+  <div class="stats h-full">
     <app-timer [microSecOn]="microSecOn" [microSecOff]="microSecOff" [timerMinSec]="timerMinSec" class="timer" (timerEvent)="receivingTimer($event)"></app-timer>
     <div class="hits-area">
       <div class="hits">FALTANTES: {{hits}}</div>
