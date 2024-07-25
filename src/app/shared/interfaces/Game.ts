@@ -1,5 +1,7 @@
-export interface ScoreGame{
-  email: string,
-  score: number,
-  game: string
+export interface Game {
+  codigo: number;
+  name: string;
+  router: string;
+  text: string;
+  icon: string;
 }

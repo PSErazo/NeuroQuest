@@ -4,6 +4,7 @@ import { NavComponent } from './shared/nav/nav.component';
 import { ButtonComponent } from './shared/buttons/button.component';
 import { SequenceComponent } from './components/sequence/sequence.component';
 import { CommonModule } from '@angular/common';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 interface games {
   name: string;
@@ -20,6 +21,7 @@ interface games {
     NavComponent,
     ButtonComponent,
     SequenceComponent,
+    DashboardComponent,
     RouterLink,
   ],
   templateUrl: './app.component.html',

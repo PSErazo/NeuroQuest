@@ -11,34 +11,26 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './nav.component.html',
 })
 export class NavComponent implements OnInit {
+  login: boolean = false;
+  name: string = '';
 
-  login:boolean = false;
-  name: string = ''
-
-  constructor(private authService:AuthService){}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-
-    this.authService.loginEmitter.subscribe(
-      data => {
-        this.login = data;
-        this.name =JSON.parse(localStorage.getItem('user')!)?.name
-        console.log(JSON.parse(localStorage.getItem('user')!)?.name);
-
-      }
-    )
-
+    this.authService.loginEmitter.subscribe((data) => {
+      this.login = data;
+      this.name = JSON.parse(localStorage.getItem('user')!)?.name;
+      console.log(JSON.parse(localStorage.getItem('user')!)?.name);
+    });
   }
 
   // observador(): Observable<boolean>{
   // observador(){
 
-
   //   setTimeout(() => {
   //     this.name = 'pedrito'
   //     this.login = true
   //   }, 5000)
-
 
   //   // if (localStorage.getItem('name') == '') of(false);
   //   // this.name =localStorage.getItem('name')!
@@ -46,30 +38,29 @@ export class NavComponent implements OnInit {
 
   // }
 
-  logout(){
+  logout() {
     this.authService.logout();
-    this.login = false
+    this.login = false;
   }
-  menu(){
-    setTimeout(()=>
-    {
-      let menu:HTMLElement | null = document.querySelector('.menu-mobile')
-      if(menu){
-        if(menu.classList.contains('hidden')){
-          menu.classList.remove('hidden')
-          menu.classList.add('block')
-      }else{
-          menu.classList.remove('block')
-          menu.classList.add('hidden')
+  menu() {
+    setTimeout(() => {
+      let menu: HTMLElement | null = document.querySelector('.menu-mobile');
+      if (menu) {
+        if (menu.classList.contains('hidden')) {
+          menu.classList.remove('hidden');
+          menu.classList.add('block');
+        } else {
+          menu.classList.remove('block');
+          menu.classList.add('hidden');
+        }
       }
-      }
-    },)
+    });
   }
- closeMenu(){
-  let menu:HTMLElement | null = document.querySelector('.menu-mobile')
-  if(menu){
-  menu.classList.remove('block')
-  menu.classList.add('hidden')
- }
-}
+  closeMenu() {
+    let menu: HTMLElement | null = document.querySelector('.menu-mobile');
+    if (menu) {
+      menu.classList.remove('block');
+      menu.classList.add('hidden');
+    }
+  }
 }
