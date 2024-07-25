@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ScoreService } from '../../services/score.service';
 import { ScoreGame } from '../interfaces/ScoreGame';
+import { Game } from '../interfaces/Game';
 
 @Component({
   selector: 'app-startgame',
@@ -29,21 +30,20 @@ export class StartgameComponent {
   }
 
   saveScore() {
-    //   console.log(' entre a saveScore');
-    //   if (!localStorage.getItem('token')) return;
-    //   let games = JSON.parse(localStorage.getItem('games')!);
-    //   let gameCode = games.filter)
-    //   console.log(games);
-    //   let scoreGame: ScoreGame = {
-    //     game: this.name,
-    //     score: this.levelScore
-    //       ? parseInt(this.levelScore.split(' ')[1])
-    //       : this.levelScoreN!,
-    //   };
-    //   console.log(scoreGame);
-    //   this.scoreService.saveScore(scoreGame)?.subscribe((data) => {
-    //     console.log(data);
-    //     this.saved = true;
-    //   });
+    console.log(' entre a saveScore');
+    if (!localStorage.getItem('token')) return;
+    let games: Game[] = JSON.parse(localStorage.getItem('games')!);
+    let game: number = games.find((games) => games.name === this.name)!.codigo;
+    let scoreGame: ScoreGame = {
+      game: game,
+      score: this.levelScore
+        ? parseInt(this.levelScore.split(' ')[1])
+        : this.levelScoreN!,
+    };
+    console.log(scoreGame);
+    this.scoreService.saveScore(scoreGame)?.subscribe((data) => {
+      console.log(data);
+      this.saved = true;
+    });
   }
 }

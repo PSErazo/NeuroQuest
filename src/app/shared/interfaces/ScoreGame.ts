@@ -1,4 +1,4 @@
 export interface ScoreGame {
   score: number;
-  game: string;
+  game: number;
 }
