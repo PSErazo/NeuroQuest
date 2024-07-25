@@ -132,9 +132,10 @@ export class SequenceComponent {
         this.deshabilitar(quadrate - 1, 'fadeInError');
       }, 300);
       console.log('error');
-      this.hearts--;
+     
       console.log(`vidas actuales:${this.hearts}`)
       let life: HTMLElement = document.querySelectorAll('.fa-solid')[this.hearts] as HTMLElement;
+      this.hearts--;
       life.style.color = '#FAA7A5'
 
       if (this.hearts < 1) {
