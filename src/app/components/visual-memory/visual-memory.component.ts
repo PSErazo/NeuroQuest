@@ -353,8 +353,10 @@ export class VisualMemoryComponent {
 
 
 
-          this.heart--;
+          
+        
           let life: HTMLElement = document.querySelectorAll('.fa-solid')[this.heart] as HTMLElement;
+          this.heart--;
           life.style.color = '#FAA7A5';
 
 
@@ -430,8 +432,10 @@ export class VisualMemoryComponent {
         if(this.level === 6){
           container.classList.remove('w-80')
           container.classList.remove('h-80')
-          container.classList.add('w-96')
-          container.classList.add('h-96')
+          container.classList.add('min-[435px]:w-96')
+          container.classList.add('min-[435px]:h-96')
+          container.classList.add('w-80')
+          container.classList.add('h-80')
         }
         // se cambian aumentan las columnas mediante las clases
         container.classList.remove(`grid-cols-${this.columns - 1}`);
