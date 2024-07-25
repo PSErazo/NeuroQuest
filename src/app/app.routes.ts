@@ -11,41 +11,40 @@ import SignUpComponent from './pages/sign-up/sign-up.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
-
   {
     path: 'game',
     component: GamesComponent,
-    children:[
-        {
-          path: 'sequencememory',
-          component: SequenceComponent,
-        },
-        {
-          path: 'typing',
-          component: TypingComponent,
-        },
-        {
-          path: 'aimtrainer',
-          component: AimTrainerComponent,
-        },
-        {
-          path: 'numbermemory',
-          component: NumberMemoryComponent,
-        },
-        {
-          path: 'reactiontime',
-          component: ReactionTimeComponent,
-        },
-        {
-          path: 'visualmemory',
-          component: VisualMemoryComponent,
-        },
-        {
-          path: '',
-          redirectTo:'sequencememory',
-          pathMatch: 'full'
-        },
-      ],
+    children: [
+      {
+        path: 'sequencememory',
+        component: SequenceComponent,
+      },
+      {
+        path: 'typing',
+        component: TypingComponent,
+      },
+      {
+        path: 'aimtrainer',
+        component: AimTrainerComponent,
+      },
+      {
+        path: 'numbermemory',
+        component: NumberMemoryComponent,
+      },
+      {
+        path: 'reactiontime',
+        component: ReactionTimeComponent,
+      },
+      {
+        path: 'visualmemory',
+        component: VisualMemoryComponent,
+      },
+      {
+        path: '',
+        redirectTo: 'sequencememory',
+        pathMatch: 'full',
+      },
+    ],
   },
   {
     path: 'login',
@@ -57,11 +56,11 @@ export const routes: Routes = [
   },
   {
     path: 'singup',
-    component: SignUpComponent
+    component: SignUpComponent,
   },
   {
     path: '',
     redirectTo: '/game',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
 ];

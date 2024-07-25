@@ -6,48 +6,44 @@ import { NewUser, User, userResponse } from '../shared/interfaces/User';
 import { baseUrl } from '../../assets/constantes';
 import { tap } from 'rxjs';
 
-const url = baseUrl
+const url = baseUrl;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  isLogin: boolean = false;
 
-  isLogin:boolean = false
   @Output()
   loginEmitter = new EventEmitter<boolean>();
 
-  private user?: NewUser
+  private user?: NewUser;
 
   constructor(private http: HttpClient) {}
 
-  isLoggedIn(islog:boolean) {
+  isLoggedIn(islog: boolean) {
     this.loginEmitter.emit(islog);
   }
 
   get currentUser(): User | undefined {
-    if ( !this.user ) return undefined;
-    return structuredClone( this.user );
+    if (!this.user) return undefined;
+    return structuredClone(this.user);
   }
 
-  register(newUser:NewUser) {
-    return this.http.post(`${url}auth/register`, newUser)
+  register(newUser: NewUser) {
+    return this.http.post(`${url}auth/register`, newUser);
   }
 
-  login(user: User): Observable<userResponse>{
-    return this.http.post<userResponse>(`${url}auth/login`,user)
-    .pipe(
-      tap( user => this.user = user.user ),
-      tap( user => localStorage.setItem('token', user.token )),
-      tap( user => {
-        localStorage.setItem('user', JSON.stringify(user.user) )
-        this.isLoggedIn(true)
-      }
-      ),
+  login(user: User): Observable<userResponse> {
+    return this.http.post<userResponse>(`${url}auth/login`, user).pipe(
+      tap((user) => (this.user = user.user)),
+      tap((user) => localStorage.setItem('token', user.token)),
+      tap((user) => {
+        localStorage.setItem('user', JSON.stringify(user.user));
+        this.isLoggedIn(true);
+      })
     );
   }
-
-
 
   logout() {
     this.user = undefined;
