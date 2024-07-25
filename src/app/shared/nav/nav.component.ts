@@ -50,7 +50,26 @@ export class NavComponent implements OnInit {
     this.authService.logout();
     this.login = false
   }
-
-
-
+  menu(){
+    setTimeout(()=>
+    {
+      let menu:HTMLElement | null = document.querySelector('.menu-mobile')
+      if(menu){
+        if(menu.classList.contains('hidden')){
+          menu.classList.remove('hidden')
+          menu.classList.add('block')
+      }else{
+          menu.classList.remove('block')
+          menu.classList.add('hidden')
+      }
+      }
+    },)
+  }
+ closeMenu(){
+  let menu:HTMLElement | null = document.querySelector('.menu-mobile')
+  if(menu){
+  menu.classList.remove('block')
+  menu.classList.add('hidden')
+ }
+}
 }
