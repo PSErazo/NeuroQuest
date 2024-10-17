@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ScoreGame } from '../shared/interfaces/ScoreGame';
+import { myScore, ScoreGame } from '../shared/interfaces/ScoreGame';
 import { HttpClient } from '@angular/common/http';
 import { baseUrl } from '../../assets/constantes';
 
@@ -28,7 +28,7 @@ export class ScoreService {
     let token = localStorage.getItem('token');
     if (!token) return;
 
-    return this.http.get(`${url}score/${game}`, {
+    return this.http.get<myScore[]>(`${url}score/${game}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
