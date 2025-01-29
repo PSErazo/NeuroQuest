@@ -1,0 +1,64 @@
+Reu 1
+------
+
+tarea 1 -> leer el codigo y entenderlo, en la proxima reu me debes explicar como supuestamente
+esta funcionando el codigo para que el juego funcione, 
+
+tarea2 => al iniciar el juego, le damos start y el cursor aparece en donde dice Correctas y no se puede escribir, validar que paso, 
+tarea3  => cuando escribo no me permite errar porque tengo que si o si teclear la barra espaciadora para seguir escribiendo 
+la siguiente palabra, si hago espacio salta la palabra y la marca como errada, 
+tarea4 => no puedo borrar, 
+
+tarea 2 opcional => puedes realizar las correcciones o puedes pensar en un flujo nuevo y programar en base
+a como haz realizado este juego antes
+
+
+Reu 2
+------
+
+winner => en menos tiempo y mas palabras/letras correctas
+
+
+--> CITAS ALEATORIAS => Se creara una api o ver si se puede consumir una ya creada.
+--> CONTADOR DE PALABRAS --> LO VA A REVISAR *
+--> CRONOMETRO  => valida quien puede tipear el texto en menos tiempo. (ascendente)
+--> la longitud del texto debe ser igual o similar en base a letras, para todos los participantes
+
+obs: 
+
+1 => las letras escritas no van a ser borradas ya que el ganador se mide por cuantas letras correctas tiene y que tiempo demora en terminar de escribir
+2 => si la frase tiene espacios en blanco, estos no son considerados en el contador como correcto o incorrecto, es necesario darle en la barra espaciadora para continuar con la siguiente palabra
+
+resolver: 
+
+error => presionas barra espaciadora al iniciar una palabra y se marca toda las las letras de la palabra como error
+
+solucion => si das un espacio cuando tienes que presionar una letra, solo se marca en error una letra, --- revisar si esto es posible en base la tus reglas del juego
+
+NOTAS PROPIAS: correctas e incorrectas por letra
+
+/*
+
+Reu 2 
+------
+
+winner => en menos tiempo y mas palabras/letras correctas
+
+--> CITAS ALEATORIAS => Se creara una api o ver si se puede consumir una ya creada.
+--> CONTADOR DE PALABRAS erroneas y correctas--> LO VA A REVISAR * 
+--> CRONOMETRO  => valida quien puede tipear el texto en menos tiempo. (ascendente)
+--> la longitud del texto debe ser igual o similar en base a letras, para todos los participantes
+
+
+obs: 
+
+1 => las letras escritas no van a ser borradas ya que el ganador se mide por cuantas letras correctas tiene y que tiempo demora en terminar de escribir
+2 => si la frase tiene espacios en blanco, estos no son considerados en el contador como correcto o incorrecto, es necesario darle en la barra espaciadora para continuar con la siguiente palabra
+
+
+resolver: 
+
+error => presionas barra espaciadora al iniciar una palabra y se marca toda las las letras de la palabra como error
+solucion => si das un espacio cuando tienes que presionar una letra, solo se marca en error una letra, --- revisar si esto es posible en base la tus reglas del juegos
+
+*/

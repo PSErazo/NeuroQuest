@@ -10,6 +10,7 @@ import { StartgameComponent } from '../../shared/startgame/startgame.component';
   templateUrl: './typing.component.html',
   styleUrl: './typing.component.css',
 })
+
 export class TypingComponent {
   textoPredefinido: string = '';
   textoUsuario: string = '';
@@ -21,12 +22,18 @@ export class TypingComponent {
   name: string = "Typing";
   text: string = "Cuantas palabras por minuto puedes tipear?"
   estadoComponente: boolean = false;
-  //texto separado por palabras
-  words: string[] = "i dont wanna wait come take it".split(" ")
-  wordsCount: number = this.words.length
-  correctas: number = 0
-  score: string = ""
 
+  paragraphs: string[] = [
+    "The quick brown fox jumps over the lazy dog",
+    "She sells sea shells by the sea shore",
+    "A journey of a thousand miles begins with a single step",
+    "To be or not to be, that is the question",
+    "All that glitters is not gold"
+  ];
+
+  correctas: number = 0
+  incorrectas: number = 0
+  score: string = ""
 
   startGame() {
     this.newGame()
@@ -39,116 +46,93 @@ export class TypingComponent {
     }
   }
 
+  private currentParagraph: string = "";
+  private userInput: string = "";
 
-  addClass(el: HTMLElement, name: string) {
-    el.className += ' ' + name
-  }
+  constructor() {}
 
-  removeClass(el: HTMLElement, name: string) {
-    el.className = el.className.replace(name, ' ')
-  }
-  //generador de palabras 
-  randomWord() {
-    const randomIndex = Math.floor(Math.random() * this.wordsCount)
-    return this.words[randomIndex]
-  }
-  //cada palabra generada
-  formatWord(word: string) {
-    return `<div class="word inline-block ml-3"><span class="letter quit">${word.split("").join('</span><span class="letter quit">')}</span></div>`
-  }
   newGame() {
     setTimeout(() => {
-      let words = document.getElementById('words')
-
-      if (words) {
-        words.innerHTML = ''
+      let paragraphsElement = document.getElementById("paragraphs");
+      if (paragraphsElement) {
+        this.currentParagraph = this.getRandomParagraph();
+        paragraphsElement.innerHTML = this.formatParagraphs(this.currentParagraph);
       }
 
-      //se imprimen 200 palabras
-      for (let i = 0; i < 100; i++) {
-        if (words) {
-          words.innerHTML += this.formatWord(this.randomWord())
-        }
-      }
+      let classParagraph = document.querySelector(".paragraph") as HTMLElement;
+      let classLetter = document.querySelector(".letter") as HTMLElement;
 
-      let classWord = document.querySelector('.word') as HTMLElement
-      let classLetter = document.querySelector('.letter') as HTMLElement
-
-      if (classWord) {
-        this.addClass(classWord, 'current')
+      if (classParagraph) {
+        this.addClass(classParagraph, "current");
       }
 
       if (classLetter) {
-        this.addClass(classLetter, 'current')
+        this.addClass(classLetter, "current");
       }
 
-      const gameContainer = document.querySelector('.game') as HTMLElement;
+      const gameContainer = document.querySelector(".game") as HTMLElement;
+      gameContainer.addEventListener("keydown", (e: KeyboardEvent) => {
+        e.preventDefault();
+        this.handleTyping(e);
+      });
+    });
+  }
 
-      gameContainer.addEventListener('keydown', (e: KeyboardEvent) => {
-        
-        e.preventDefault()
-        const key = e.key
-        console.log("se presiono una tecla" + key)
-        const currentWord = document.querySelector('.word.current') as HTMLElement;
-        const currentLetter = document.querySelector('.letter.current') as HTMLElement;
-        const expected = currentLetter?.innerHTML || ' '
+  private getRandomParagraph(): string {
+    const randomIndex = Math.floor(Math.random() * this.paragraphs.length);
+    return this.paragraphs[randomIndex];
+  }
 
-        const isLetter = key.length === 1 && key !== ' '
-        const space = " "
+  private formatParagraphs(paragraph: string): string {
+    return paragraph
+      .split("")
+      .map((char, index) => `<span id="char-${index}" class="letter">${char}</span>`)
+      .join("");
+  }
 
-        if (isLetter) {
-          if (currentLetter) {
-            if (key === expected) {
-              this.correctas++
-            }
-            this.addClass(currentLetter, key === expected ? 'text-[#00d288]' : 'text-[#c65956]')
-            this.removeClass(currentLetter, 'quit')
-            this.removeClass(currentLetter, 'current')
-            if (currentLetter.nextSibling) {
-              const nextLetter = currentLetter.nextElementSibling as HTMLElement;
-              this.addClass(nextLetter, 'current')
-            }
-          }
+  private handleTyping(event: KeyboardEvent) {
+    const key = event.key;
+    const currentLetter = document.querySelector(".letter.current") as HTMLElement;
+    const expected = currentLetter?.innerHTML || " ";
+
+    if (key.length === 1 || key === " ") {
+      if (currentLetter) {
+        if (key === expected) {
+          this.addClass(currentLetter, "text-[#00d288]");
+          this.correctas++;
+        } else {
+          this.addClass(currentLetter, "text-[#c65956]");
+          this.incorrectas++;
         }
-
-        if (key === space) {
-
-          if (expected !== ' ') {
-            const nodeList: NodeListOf<Element> = document.querySelectorAll('.word.current .letter.quit');
-            console.log(nodeList)
-            const elementsArray: HTMLElement[] = Array.from(nodeList) as HTMLElement[];
-
-            elementsArray.forEach(letter => {
-              this.addClass(letter, 'text-[#c65956]')
-            })
-          }
-
-          if (currentWord.nextElementSibling) {
-            const nextWord = currentWord.nextElementSibling as HTMLElement;
-            this.removeClass(currentWord, 'current')
-            this.addClass(nextWord, 'current')
-            if (currentLetter) {
-
-              this.removeClass(currentLetter, 'current')
-
-            }
-            const firstChild = nextWord && nextWord.firstElementChild;
-            if (firstChild instanceof HTMLElement) {
-              this.addClass(firstChild, 'current');
-            }
-          } else {
-            this.score = String(this.correctas)
-            this.estadoComponente = false
-            this.pantallaInicial = false
-            this.restartGame()
-          }
+        this.removeClass(currentLetter, "current");
+        if (currentLetter.nextSibling) {
+          const nextLetter = currentLetter.nextElementSibling as HTMLElement;
+          this.addClass(nextLetter, "current");
+        } else {
+          this.endGame();
         }
-      })
-    },)
+      }
+    }
+  }
+
+  private endGame() {
+    this.score = `Correctas: ${this.correctas}, Incorrectas: ${this.incorrectas}`;
+    this.estadoComponente = false;
+    this.pantallaInicial = false;
+    this.restartGame();
+  }
+
+  private addClass(element: HTMLElement, className: string) {
+    element.classList.add(className);
+  }
+
+  private removeClass(element: HTMLElement, className: string) {
+    element.classList.remove(className);
   }
 
   restartGame() {
     this.correctas = 0
+    this.incorrectas = 0
     this.newGame()
   }
 }

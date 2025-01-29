@@ -15,7 +15,7 @@ body{
   font-family: 'Roboto Mono', monospace;
   font-size: 1.2rem;
 }
-#words{
+#paragraphs{
   color: white;
 }
 #focus-error{
