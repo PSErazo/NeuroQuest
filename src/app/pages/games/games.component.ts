@@ -23,6 +23,8 @@ export default class GamesComponent implements OnInit {
     });
   }
 
+  //  pepeito pelotes clavito clavores
+
   // games: Game[] = [
   //   {
   //     name: 'Sequence Memory',
